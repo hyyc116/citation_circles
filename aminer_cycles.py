@@ -78,7 +78,8 @@ def detect_cycle_from_aminer(aminer_citation_network_path):
 
 	cycles = []
 	for comp in nx.strongly_connected_components(G):
-		if len(comp)
+		if len(comp)==0:
+			continue
 		cycles.append(','.join(comp))
 
 
