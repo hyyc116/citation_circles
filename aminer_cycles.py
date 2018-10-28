@@ -105,7 +105,7 @@ def cycle_length_distribution(aminer_cycles_path):
 		ys.append(size_dis[size])
 
 	plt.figure(figsize=(6,5))
-	plt.bar(xs,ys)
+	plt.plot(xs,ys,'-o')
 
 	plt.xlabel('size of cycle')
 	plt.ylabel('number of cycles')
