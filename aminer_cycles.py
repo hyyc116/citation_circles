@@ -146,7 +146,7 @@ def cycle_year_difference_distribution(aminer_cycles_path,aminer_paper_year_path
 	plt.figure(figsize=(6,5))
 	plt.plot(xs,ys,'-o')
 
-	# plt.xscale('log')
+	plt.xscale('log')
 	plt.yscale('log')
 
 	plt.xlabel('max time difference in cycle')

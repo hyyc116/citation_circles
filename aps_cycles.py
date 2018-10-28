@@ -112,7 +112,7 @@ def cycle_year_difference_distribution(aps_cycles_path,aps_paper_year_path):
 	plt.figure(figsize=(6,5))
 	plt.plot(xs,ys,'-o')
 
-	plt.xscale('log')
+	# plt.xscale('log')
 	plt.yscale('log')
 
 	plt.xlabel('max time difference in cycle')
