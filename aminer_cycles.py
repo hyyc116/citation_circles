@@ -165,7 +165,7 @@ if __name__ == '__main__':
 
 	# cycle_size_distribution('data/aminer_cycles.txt')
 
-	cycle_year_difference_distribution('data/aminer_cycles.txt')
+	cycle_year_difference_distribution('data/aminer_cycles.txt','data/aminer_paper_year.json')
 
 
 
