@@ -37,8 +37,12 @@ def generate_citation_network(aminer_ref_json_file):
 		if progress%10000==0:
 			logging.info('progress {:} ...'.format(progress))
 
+		citing_pid = obj['cpid']
+		cited_pid = obj['pid']
+		if citing_pid == cited_pid:
+			continue
 
-		line= '{:},{:}'.format(obj['cpid'],obj['pid'])
+		line= '{:},{:}'.format(citing_pid,cited_pid)
 		lines.append(line)
 
 		pid_year[obj['cpid']] = obj['cpid_year']
@@ -65,11 +69,16 @@ def detect_cycle_from_aminer(aminer_citation_network_path):
 
 		edges.append([citing_pid,cited_pid])
 
+	logging.info('{:} citation relations has been loaded.'.format(len(edges)))
+
 	G = nx.DiGraph()
 	G.add_edges_from(edges)
 
+	logging.info('start to detect cycles from aminer citation network ...')
+
 	cycles = []
 	for comp in nx.strongly_connected_components(G):
+		if len(comp)
 		cycles.append(','.join(comp))
 
 
@@ -78,7 +87,7 @@ def detect_cycle_from_aminer(aminer_citation_network_path):
 
 if __name__ == '__main__':
 	
-	# generate_citation_network('/public/data/Aminer_MAG/Aminer/aminer_reference.json')
+	generate_citation_network('/public/data/Aminer_MAG/Aminer/aminer_reference.json')
 
 	detect_cycle_from_aminer('data/aminer_citation_network.txt')
 
