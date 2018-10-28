@@ -26,7 +26,7 @@ def APS_citation_cycles(aps_citation_network_path):
 	edges=[]
 	for line in aps_references_file:
 		citing_doi,cited_doi = line.strip().split(',')
-		edges.add([citing_doi,cited_doi])
+		edges.append([citing_doi,cited_doi])
 
 
 	logging.info('{:} citation relations are loaded ...'.format(len(edges)))
@@ -47,9 +47,92 @@ def APS_citation_cycles(aps_citation_network_path):
 	open('data/aps_cycles.txt','w').write('\n'.join(cycles))
 	logging.info('aminer cycles saved to data/aps_cycles.txt')
 
+## cycle大小的分布
+def cycle_size_distribution(aps_cycles_path):
+	# cycles = []
+
+	size_dis = defaultdict(int)
+	for line in open(aps_cycles_path):
+
+		cycle = line.split(',')
+
+		size_dis[len(cycle)]+=1
+
+	xs = []
+	ys = []
+	for size in sorted(size_dis.keys()):
+		xs.append(size)
+		ys.append(size_dis[size])
+
+	plt.figure(figsize=(6,5))
+	plt.plot(xs,ys,'-o')
+
+	plt.xscale('log')
+	plt.yscale('log')
+
+	plt.xlabel('size of cycle')
+	plt.ylabel('number of cycles')
+
+	plt.tight_layout()
+
+	plt.savefig('fig/aps_cycle_size_dis.jpg',dpi=200)
+
+	logging.info('cycle size distribution fig saved to fig/aps_cycle_size_dis.jpg')
+
+def cycle_year_difference_distribution(aps_cycles_path,aps_paper_year_path):
+
+	year_differences = defaultdict(int)
+
+	pid_year = json.loads(open(aps_paper_year_path).read())
+	for line in open(aps_cycles_path):
+		line = line.strip()
+		years = []
+
+		for p in line.split(','):
+			year = pid_year.get(p,-1)
+			if year==-1:
+				print p
+				continue
+
+			years.append(year)
+		if len(years) <2:
+			continue
+
+		yd = np.max(years)-np.min(years)
+
+		year_differences[yd]+=1
+
+	xs = []
+	ys = []
+
+	for yd in sorted(year_differences.keys()):
+		xs.append(yd)
+		ys.append(year_differences[yd])
+
+	plt.figure(figsize=(6,5))
+	plt.plot(xs,ys,'-o')
+
+	# plt.xscale('log')
+	plt.yscale('log')
+
+	plt.xlabel('max time difference in cycle')
+	plt.ylabel('number of cycles')
+
+	plt.tight_layout()
+
+	plt.savefig('fig/aps_cycle_year_difference_dis.jpg',dpi=200)
+
+	logging.info('cycle year difference distribution fig saved to fig/aps_cycle_year_difference_dis.jpg')
+
 
 if __name__ == '__main__':
-	APS_citation_cycles(APS_DATA_PATH)
+	# APS_citation_cycles(APS_DATA_PATH)
+	citation_cycles_path = 'data/aps_cycles.txt'
+	paper_year_path = 'data/APS_paper_year.json'
+	# cycle_size_distribution(citation_cycles_path)
+
+	cycle_year_difference_distribution(citation_cycles_path,paper_year_path)
+
 
 
 
