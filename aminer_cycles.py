@@ -86,11 +86,43 @@ def detect_cycle_from_aminer(aminer_citation_network_path):
 	open('data/aminer_cycles.txt','w').write('\n'.join(cycles))
 	logging.info('aminer cycles saved to data/aminer_cycles.txt')
 
+
+## cycle大小的分布
+def cycle_length_distribution(aminer_cycles_path):
+	# cycles = []
+
+	size_dis = defaultdict(int)
+	for line in open(aminer_cycles_path):
+
+		cycle = line.split(',')
+
+		size_dis[len(cycle)]+=1
+
+	xs = []
+	ys = []
+	for size in sorted(size_dis.keys()):
+		xs.append(size)
+		ys.append(size_dis[size])
+
+	plt.figure(figsize=(6,5))
+	plt.bar(xs,ys)
+
+	plt.xlabel('size of cycle')
+	plt.ylabel('number of cycles')
+
+	plt.tight_layout()
+
+	plt.savefig('fig/aminer_cycle_size_dis.jpg',dpi=200)
+
+
+
 if __name__ == '__main__':
 	
 	# generate_citation_network('/public/data/Aminer_MAG/Aminer/aminer_reference.json')
 
-	detect_cycle_from_aminer('data/aminer_citation_network.txt')
+	# detect_cycle_from_aminer('data/aminer_citation_network.txt')
+
+	cycle_length_distribution('data/aminer_cycles.txt')
 
 
 
