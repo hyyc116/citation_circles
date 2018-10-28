@@ -43,9 +43,20 @@ def APS_citation_cycles(aps_citation_network_path):
 		cycles.append(','.join(comp))
 
 
+
 	open('data/aps_cycles.txt','w').write('\n'.join(cycles))
 	logging.info('aminer cycles saved to data/aps_cycles.txt')
 
 
 if __name__ == '__main__':
 	APS_citation_cycles(APS_DATA_PATH)
+
+
+
+
+
+
+
+
+
+	
