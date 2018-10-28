@@ -125,6 +125,7 @@ def cycle_year_difference_distribution(aminer_cycles_path,aminer_paper_year_path
 
 	pid_year = json.loads(open(aminer_paper_year_path).read())
 	for line in open(aminer_cycles_path):
+		line = line.strip()
 		years = []
 
 		for p in line.split(','):
