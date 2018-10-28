@@ -88,7 +88,7 @@ def detect_cycle_from_aminer(aminer_citation_network_path):
 
 
 ## cycle大小的分布
-def cycle_length_distribution(aminer_cycles_path):
+def cycle_size_distribution(aminer_cycles_path):
 	# cycles = []
 
 	size_dis = defaultdict(int)
@@ -117,7 +117,45 @@ def cycle_length_distribution(aminer_cycles_path):
 
 	plt.savefig('fig/aminer_cycle_size_dis.jpg',dpi=200)
 
+	logging.info('cycle size distribution fig saved to fig/aminer_cycle_size_dis.jpg')
 
+def cycle_year_difference_distribution(aminer_cycles_path,aminer_paper_year_path):
+
+	year_differences = defaultdict(int)
+
+	pid_year = json.loads(open(aminer_paper_year_path).read())
+	for line in open(aminer_cycles_path):
+		years = []
+
+		for p in line.split(','):
+			year = pid_year[p]
+			years.append(year)
+
+		yd = np.max(years)-np.min(years)
+
+		year_differences[yd]+=1
+
+	xs = []
+	ys = []
+
+	for yd in year_differences.keys():
+		xs.append(yd)
+		ys.append(year_differences[yd])
+
+	plt.figure(figsize=(6,5))
+	plt.plot(xs,ys,'-o')
+
+	plt.xscale('log')
+	plt.yscale('log')
+
+	plt.xlabel('max time difference in cycle')
+	plt.ylabel('number of cycles')
+
+	plt.tight_layout()
+
+	plt.savefig('fig/aminer_cycle_year_difference_dis.jpg',dpi=200)
+
+	logging.info('cycle year difference distribution fig saved to fig/aminer_cycle_year_difference_dis.jpg')
 
 if __name__ == '__main__':
 	
@@ -125,7 +163,9 @@ if __name__ == '__main__':
 
 	# detect_cycle_from_aminer('data/aminer_citation_network.txt')
 
-	cycle_length_distribution('data/aminer_cycles.txt')
+	# cycle_size_distribution('data/aminer_cycles.txt')
+
+	cycle_year_difference_distribution('data/aminer_cycles.txt')
 
 
 
