@@ -88,7 +88,7 @@ def detect_cycle_from_aminer(aminer_citation_network_path):
 
 if __name__ == '__main__':
 	
-	generate_citation_network('/public/data/Aminer_MAG/Aminer/aminer_reference.json')
+	# generate_citation_network('/public/data/Aminer_MAG/Aminer/aminer_reference.json')
 
 	detect_cycle_from_aminer('data/aminer_citation_network.txt')
 
