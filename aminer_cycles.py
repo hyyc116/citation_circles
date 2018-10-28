@@ -53,9 +53,34 @@ def generate_citation_network(aminer_ref_json_file):
 
 	logging.info('paper year json saved to data/aminer_paper_year.json.')
 
+
+
+def detect_cycle_from_aminer(aminer_citation_network_path):
+	edges = []
+
+	for line in open(aminer_citation_network_path):
+		line = line.strip()
+
+		citing_pid,cited_pid = line.split(',')
+
+		edges.append([citing_pid,cited_pid])
+
+	G = nx.DiGraph()
+	G.add_edges_from(edges)
+
+	cycles = []
+	for comp in nx.strongly_connected_components(G):
+		cycles.append(','.join(comp))
+
+
+	open('data/aminer_cycles.txt','w').write('\n'.join(cycles))
+	logging.info('aminer cycles saved to data/aminer_cycles.txt')
+
 if __name__ == '__main__':
 	
-	generate_citation_network('/public/data/Aminer_MAG/Aminer/aminer_reference.json')
+	# generate_citation_network('/public/data/Aminer_MAG/Aminer/aminer_reference.json')
+
+	detect_cycle_from_aminer('data/aminer_citation_network.txt')
 
 
 
