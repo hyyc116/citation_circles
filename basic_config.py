@@ -34,6 +34,7 @@ from networkx.algorithms.core import core_number
 from networkx.algorithms.core import k_core
 import psycopg2
 
+from viz_graph import *
 # from gini import gini
 
 
@@ -100,7 +101,7 @@ class dbop:
 	   	   self._insert_index=insert_index
 	   	   self._insert_values=[]
 	   	   logging.debug("connect database with normal cursor.")
-	   	   self._db = psycopg2.connect(database='wos_core_2',user="huanyong",password = "pendulum_wist_estival")	   
+	   	   self._db = psycopg2.connect(database='wos_core_3',user="huanyong",password = "pendulum_wist_estival")	   
 	   	   self._cursor = self._db.cursor()
 
 

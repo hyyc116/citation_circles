@@ -7,24 +7,47 @@
 
 '''
 
-import networkx as nx
+from basic_config import *
 
 
 if __name__ == '__main__':
 	
 	G = nx.DiGraph()
 	edges = [
-		[317800,685521],
-		[685521,317800],
-		[603169,685521],
-		[603172,685521],
-		[603175,685521],
-		[604255,685521],
-		[852179,685521],
-		[852184,685521]
+		['a','b'],
+		['b','c'],
+		['c','d'],
+		['d','a'],
+		['c','a'],
+		['d','e'],
+		['e','d'],
+		['e','h'],
+		['h','e']
 	]
+
+	plot_a_subcascade(edges,'fig/test')
 
 	G.add_edges_from(edges)
 
 	for comp in nx.strongly_connected_components(G):
 		print comp
+
+
+
+	G = nx.DiGraph()
+	edges = [
+		['a','b'],
+		['b','c'],
+		['c','d'],
+		['d','e'],
+		['e','f']
+	]
+
+	plot_a_subcascade(edges,'fig/test2')
+
+	G.add_edges_from(edges)
+
+	for comp in nx.strongly_connected_components(G):
+		print comp
+
+
