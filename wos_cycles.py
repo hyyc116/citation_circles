@@ -203,6 +203,70 @@ def cycle_size_distribution(field):
     logging.info('cycle size distribution fig saved to fig/{:}_cycle_size_dis.jpg'.format(field))
 
 
+def cycle_year_difference_distribution(field):
+
+    field = '_'.join(field.split())
+    cycles_path = 'data/sccs_{:}.txt'.format(field)
+    paper_year_path = 'data/year_{:}.json'.format(field)
+
+    year_differences = defaultdict(int)
+    num=[]
+
+    pid_year = json.loads(open(paper_year_path).read())
+
+    logging.info('{:} papers year are loaded.'.format(len(pid_year.keys())))
+
+    for line in open(cycles_path):
+        line = line.strip()
+        years = []
+        cycle = line.split(',')
+        for p in cycle: 
+            year = int(pid_year.get(p,-1))
+            if year==-1:
+                # print p
+                num.append(p)
+                continue
+
+            years.append(year)
+
+
+
+        if len(years) <2:
+            continue
+
+        yd = np.max(years)-np.min(years)
+        if len(cycle)>100:
+            print len(cycle),yd
+
+        year_differences[yd]+=1
+    
+    logging.info('{:} of papers are not found.'.format(len(num)))
+
+    # open('data/aps_all_ny_dois.txt','w').write('\n'.join(num))
+
+    xs = []
+    ys = []
+
+    for yd in sorted(year_differences.keys()):
+        xs.append(yd)
+        ys.append(year_differences[yd])
+
+    plt.figure(figsize=(6,5))
+    plt.plot(xs,ys,'-o')
+
+    # plt.xscale('log')
+    plt.yscale('log')
+
+    plt.xlabel('max time difference in cycle')
+    plt.ylabel('number of cycles')
+
+    plt.tight_layout()
+
+    plt.savefig('fig/{:}_cycle_year_difference_dis.jpg'.format(field),dpi=200)
+
+    logging.info('cycle year difference distribution fig saved to fig/{:}_cycle_year_difference_dis.jpg'.format(field))
+
+
 ### 构建特定领域的引文网络
 def generate_cc_of_field(field):
     filter_ids_of_field(field)
@@ -230,7 +294,9 @@ if __name__ == '__main__':
 
         # fecth_pubyear_of_com_ids('computer science')
 
-        cycle_size_distribution('computer science')
+        # cycle_size_distribution('computer science')
+
+        cycle_year_difference_distribution('computer science')
 
 
 
