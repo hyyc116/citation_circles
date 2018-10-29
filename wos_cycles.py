@@ -117,7 +117,7 @@ def fecth_pubyear_of_com_ids(field):
 
     query_op.close_db()
     logging.info('{:} cited ids have citations'.format(len(com_ids_year.keys())))
-    open('data/com_ids_year.json','w').write(json.dumps(com_ids_year))
+    open('data/year_{:}.json'.format(field),'w').write(json.dumps(com_ids_year))
     # return com_ids_year
 
 def find_scc_from_citation_network(field):
@@ -218,7 +218,7 @@ if __name__ == '__main__':
 
     if int(sys.argv[1])==0:
 
-        find_scc_from_citation_network('physics')
+        # find_scc_from_citation_network('physics')
 
         fecth_pubyear_of_com_ids('physics')
 
@@ -226,7 +226,7 @@ if __name__ == '__main__':
 
     else:
 
-        find_scc_from_citation_network('computer science')
+        # find_scc_from_citation_network('computer science')
 
         fecth_pubyear_of_com_ids('computer science')
 
