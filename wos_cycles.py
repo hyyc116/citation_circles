@@ -69,7 +69,7 @@ def fetch_citation_network(selected_IDs_path,field):
     # has_citations = []
 
     lines = []
-    f = open('data/citation_network_{:}.txt','w+')
+    f = open('data/citation_network_{:}.txt'.format(field),'w+')
     num_of_relations = 0
     for pid,ref_id in query_op.query_database(sql):
         progress+=1
