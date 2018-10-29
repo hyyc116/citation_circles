@@ -116,7 +116,7 @@ def fecth_pubyear_of_com_ids(field):
             com_ids_year[pid] = pubyear
 
     query_op.close_db()
-    logging.info('{:} cited ids have citations'.format(len(com_ids_year.keys())))
+    logging.info('{:} cited ids have year.'.format(len(com_ids_year.keys())))
     open('data/year_{:}.json'.format(field),'w').write(json.dumps(com_ids_year))
     # return com_ids_year
 
@@ -173,7 +173,7 @@ def find_scc_from_citation_network(field):
 def cycle_size_distribution(field):
     # cycles = []
     field = '_'.join(field.split())
-    cycles_path = 'sccs_{:}.txt'.format(field)
+    cycles_path = 'data/sccs_{:}.txt'.format(field)
     size_dis = defaultdict(int)
     for line in open(cycles_path):
 
@@ -228,7 +228,7 @@ if __name__ == '__main__':
 
         # find_scc_from_citation_network('computer science')
 
-        fecth_pubyear_of_com_ids('computer science')
+        # fecth_pubyear_of_com_ids('computer science')
 
         cycle_size_distribution('computer science')
 
