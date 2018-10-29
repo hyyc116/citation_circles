@@ -97,6 +97,51 @@ def fetch_citation_network(selected_IDs_path,field):
 
     query_op.close_db()
 
+
+def find_scc_from_citation_network(field):
+
+    logging.info('start to load citation relations ...')
+    field = '_'.join(field.split())
+    citation_network_path = 'data/citation_network_{:}.txt'.format(field)
+
+    edges = []
+    for line in open(citation_network_path):
+        line = line.strip()
+
+        citing_pid,cited_pid = line.split(',')
+
+        if citing_pid==cited_pid:
+            continue
+
+        edges.append([citing_pid,cited_pid])
+
+
+    logging.info('{:} citation relations are loaded ...'.format(len(edges)))
+
+
+    logging.info('start to generate directed graph ...')
+    cc = nx.DiGraph()
+    cc.add_edges_from(edges)
+
+    logging.info('directed graph created ...')
+
+    logging.info('start to detect strongly connected components ...')
+
+    sccs = []
+    for c in nx.strongly_connected_components(cc):
+        if len(c)==1:
+            continue
+        sccs.append(','.join(c))
+
+    logging.info('Scc detection complete, {:} sccs are detected.'.format(len(sccs)))
+
+
+    open('data/sccs_{:}.txt'.format(field),'w').write('\n'.join(sccs))
+
+    logging.info('Sccs saved to data/sccs_{:}.txt.'.format(field))
+
+
+
 ### 构建特定领域的引文网络
 def generate_cc_of_field(field):
     filter_ids_of_field(field)
@@ -107,7 +152,16 @@ if __name__ == '__main__':
 
     # generate_cc_of_field('physics')
 
-    generate_cc_of_field('computer science')
+    # generate_cc_of_field('computer science')
+
+    if int(sys.argv[1])==0:
+
+        find_scc_from_citation_network('physics')
+
+    else:
+
+        find_scc_from_citation_network('computer science')
+
 
 
     
