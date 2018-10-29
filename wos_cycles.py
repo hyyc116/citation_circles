@@ -105,8 +105,14 @@ def find_scc_from_citation_network(field):
     citation_network_path = 'data/citation_network_{:}.txt'.format(field)
 
     edges = []
+    progress = 0
     for line in open(citation_network_path):
         line = line.strip()
+
+        progress+=1
+
+        if progress%1000000==0:
+            logging.info('progress {:} ...'.format(progress))
 
         citing_pid,cited_pid = line.split(',')
 
@@ -140,6 +146,39 @@ def find_scc_from_citation_network(field):
 
     logging.info('Sccs saved to data/sccs_{:}.txt.'.format(field))
 
+
+## cycle大小的分布
+def cycle_size_distribution(field):
+    # cycles = []
+    field = '_'.join(field.split())
+    cycles_path = 'sccs_{:}.txt'.format(field)
+    size_dis = defaultdict(int)
+    for line in open(cycles_path):
+
+        cycle = line.split(',')
+
+        size_dis[len(cycle)]+=1
+
+    xs = []
+    ys = []
+    for size in sorted(size_dis.keys()):
+        xs.append(size)
+        ys.append(size_dis[size])
+
+    plt.figure(figsize=(6,5))
+    plt.plot(xs,ys,'-o')
+
+    plt.xscale('log')
+    plt.yscale('log')
+
+    plt.xlabel('size of cycle')
+    plt.ylabel('number of cycles')
+
+    plt.tight_layout()
+
+    plt.savefig('fig/{:}_cycle_size_dis.jpg'.format(field),dpi=200)
+
+    logging.info('cycle size distribution fig saved to fig/{:}_cycle_size_dis.jpg'.format(field))
 
 
 ### 构建特定领域的引文网络
