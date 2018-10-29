@@ -16,7 +16,7 @@ from basic_config import *
 
 #### 根据关键词过滤领域中的论文
 def filter_ids_of_field(field):
-    logging.info('filter out paper ids from wos_subjects of field:[{:}].'.format(field))
+    logging.info('filter out paper ids from wos_subjects of field:[{:}].'.format('_'.join(field.split())))
     selected_IDs = []
     
     ## query database 
@@ -38,14 +38,14 @@ def filter_ids_of_field(field):
 
     query_op.close_db()
     selected_IDs = list(set(selected_IDs))
-    saved_path = 'data/selected_IDs_from_{:}.txt'.format(field)
+    saved_path = 'data/selected_IDs_from_{:}.txt'.format('_'.join(field.split()))
     open(saved_path,'w').write('\n'.join(selected_IDs))
     logging.info('number of papers belong to field [{:}] is [{:}] out of total {:} papers, and saved to {:}.'.format(field,len(selected_IDs),progress,saved_path))
 
 
-    open('data/{:}_subjects.txt'.format(field),'w').write('\n'.join(sorted(list(set(subjects)))))
+    open('data/{:}_subjects.txt'.format('_'.join(field.split())),'w').write('\n'.join(sorted(list(set(subjects)))))
 
-    logging.info('subjects used saved to {:}_subjects.txt.'.format(field))
+    logging.info('subjects used saved to {:}_subjects.txt.'.format('_'.join(field.split())))
     logging.info('ID filter done.')
 
 ## 根据过滤得到的领域文章，构建citation network
@@ -69,7 +69,7 @@ def fetch_citation_network(selected_IDs_path,field):
     # has_citations = []
 
     lines = []
-    f = open('data/citation_network_{:}.txt'.format(field),'w+')
+    f = open('data/citation_network_{:}.txt'.format('_'.join(field.split())),'w+')
     num_of_relations = 0
     for pid,ref_id in query_op.query_database(sql):
         progress+=1
@@ -100,14 +100,14 @@ def fetch_citation_network(selected_IDs_path,field):
 ### 构建特定领域的引文网络
 def generate_cc_of_field(field):
     filter_ids_of_field(field)
-    _ids_path = 'data/selected_IDs_from_{:}.txt'.format(field)
+    _ids_path = 'data/selected_IDs_from_{:}.txt'.format('_'.join(field.split()))
     fetch_citation_network(_ids_path,field)
 
 if __name__ == '__main__':
 
-    generate_cc_of_field('physics')
+    # generate_cc_of_field('physics')
 
-    # generate_cc_of_field('computer science')
+    generate_cc_of_field('computer science')
 
 
     
