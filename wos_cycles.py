@@ -220,9 +220,17 @@ if __name__ == '__main__':
 
         find_scc_from_citation_network('physics')
 
+        fecth_pubyear_of_com_ids('physics')
+
+        cycle_size_distribution('physics')
+
     else:
 
         find_scc_from_citation_network('computer science')
+
+        fecth_pubyear_of_com_ids('computer science')
+
+        cycle_size_distribution('computer science')
 
 
 
