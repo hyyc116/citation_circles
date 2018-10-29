@@ -77,19 +77,19 @@ def fetch_citation_network(selected_IDs_path,field):
             logging.info('total progress {:} ...'.format(progress))
         
         if ref_id in selected_IDs or pid in selected_IDs:
-        	lines.append('{:},{:}'.format(pid,ref_id))
+            lines.append('{:},{:}'.format(pid,ref_id))
 
-        	num_of_relations+=1
+            num_of_relations+=1
             # has_citations.append(ref_id)
             # citing_IDs.append(pid)
 
             if len(lines)%10000==0:
-            	# logging.info(' {:} ...'.format(progress))
-            	f.write('\n'.join(lines)+'\n')
-            	lines = []
+                # logging.info(' {:} ...'.format(progress))
+                f.write('\n'.join(lines)+'\n')
+                lines = []
 
     if len(lines)!=0:
-    	f.write('\n'.join(lines))
+        f.write('\n'.join(lines))
 
     f.close()
 
@@ -99,18 +99,18 @@ def fetch_citation_network(selected_IDs_path,field):
 
 ### 构建特定领域的引文网络
 def generate_cc_of_field(field):
-	filter_ids_of_field(field)
-	_ids_path = 'data/selected_IDs_from_{:}.txt'.format(field)
-	fetch_citation_network(_ids_path,field)
+    filter_ids_of_field(field)
+    _ids_path = 'data/selected_IDs_from_{:}.txt'.format(field)
+    fetch_citation_network(_ids_path,field)
 
 if __name__ == '__main__':
 
-	generate_cc_of_field('physics')
+    generate_cc_of_field('physics')
 
-	generate_cc_of_field('computer science')
+    generate_cc_of_field('computer science')
 
 
-	
+    
 
 
 
