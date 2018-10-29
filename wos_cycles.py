@@ -97,6 +97,28 @@ def fetch_citation_network(selected_IDs_path,field):
 
     query_op.close_db()
 
+def fecth_pubyear_of_com_ids(field):
+    field = '_'.join(field.split())
+    com_IDs_path = 'data/selected_IDs_from_{:}.txt'.format(field)
+    com_IDs = set([line.strip() for line in open(com_IDs_path)])
+    logging.info('fetch published year of {:} combine ids'.format(len(com_IDs)))
+    com_ids_year = {}
+
+    ## query database wos_summary
+    query_op = dbop()
+    sql = 'select id,pubyear from wos_summary'
+    progress=0
+    for pid,pubyear in query_op.query_database(sql):
+        progress+=1
+        if progress%1000000==0:
+            logging.info('progress {:} ...'.format(progress))
+        if pid in com_IDs:
+            com_ids_year[pid] = pubyear
+
+    query_op.close_db()
+    logging.info('{:} cited ids have citations'.format(len(com_ids_year.keys())))
+    open('data/com_ids_year.json','w').write(json.dumps(com_ids_year))
+    # return com_ids_year
 
 def find_scc_from_citation_network(field):
 
@@ -186,6 +208,7 @@ def generate_cc_of_field(field):
     filter_ids_of_field(field)
     _ids_path = 'data/selected_IDs_from_{:}.txt'.format('_'.join(field.split()))
     fetch_citation_network(_ids_path,field)
+
 
 if __name__ == '__main__':
 
