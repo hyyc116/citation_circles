@@ -34,7 +34,7 @@ from networkx.algorithms.core import core_number
 from networkx.algorithms.core import k_core
 import psycopg2
 
-from viz_graph import *
+# from viz_graph import *
 # from gini import gini
 
 
