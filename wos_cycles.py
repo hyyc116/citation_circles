@@ -107,7 +107,7 @@ if __name__ == '__main__':
 
     generate_cc_of_field('physics')
 
-    generate_cc_of_field('computer science')
+    # generate_cc_of_field('computer science')
 
 
     
