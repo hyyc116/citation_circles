@@ -216,6 +216,7 @@ def cycle_year_difference_distribution(field):
 
     logging.info('{:} papers year are loaded.'.format(len(pid_year.keys())))
 
+    yd_years = defaultdict(int)
     for line in open(cycles_path):
         line = line.strip()
         years = []
@@ -235,8 +236,13 @@ def cycle_year_difference_distribution(field):
             continue
 
         yd = np.max(years)-np.min(years)
-        if len(cycle)>100:
-            print len(cycle),yd
+        
+        if yd > 0:
+            logging.info('yd:{:},size:{:}'.format(yd,len(years)))
+
+        else:
+            yd_years[years[0]]+=1
+
 
         year_differences[yd]+=1
     
@@ -251,7 +257,7 @@ def cycle_year_difference_distribution(field):
         xs.append(yd)
         ys.append(year_differences[yd])
 
-    plt.figure(figsize=(6,5))
+    plt.figure(figsize=(7,5))
     plt.plot(xs,ys,'-o')
 
     # plt.xscale('log')
@@ -265,6 +271,29 @@ def cycle_year_difference_distribution(field):
     plt.savefig('fig/{:}_cycle_year_difference_dis.jpg'.format(field),dpi=200)
 
     logging.info('cycle year difference distribution fig saved to fig/{:}_cycle_year_difference_dis.jpg'.format(field))
+
+
+    xs = []
+    ys = []
+
+    for year in sorted(yd_years.keys()):
+        xs.append(year)
+        ys.append(yd_years[year])
+
+    plt.figure(figsize=(7,5))
+    plt.plot(xs,ys,'-o')
+
+    # plt.xscale('log')
+    plt.yscale('log')
+
+    plt.xlabel('year')
+    plt.ylabel('number of cycles')
+
+    plt.tight_layout()
+
+    plt.savefig('fig/{:}_cycle_year_dis.jpg'.format(field),dpi=200)
+
+    logging.info('cycle year distribution fig saved to fig/{:}_cycle_year_dis.jpg'.format(field))
 
 
 ### 构建特定领域的引文网络
