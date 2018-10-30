@@ -335,10 +335,10 @@ def scc_network(field):
                 continue
 
             ## 把所有没有年份的，就是本学科之外的删除，所有本学科的都有年份
-            if paper_year.get(citing_pid,-1):
+            if paper_year.get(citing_pid,-1)==-1:
                 continue
 
-            if paper_year.get(cited_pid,-1):
+            if paper_year.get(cited_pid,-1)==-1:
                 continue
 
             ## 本学科的年份
