@@ -164,9 +164,9 @@ def find_scc_from_citation_network(field):
     logging.info('Scc detection complete, {:} sccs are detected.'.format(len(sccs)))
 
 
-    open('data/sccs_{:}.txt'.format(field),'w').write('\n'.join(sccs))
+    open('data/sccs_{:}.txt_bak'.format(field),'w').write('\n'.join(sccs))
 
-    logging.info('Sccs saved to data/sccs_{:}.txt.'.format(field))
+    logging.info('Sccs saved to data/sccs_{:}.txt_bak.'.format(field))
 
 
 ## cycle大小的分布
@@ -296,6 +296,115 @@ def cycle_year_difference_distribution(field):
     logging.info('cycle year distribution fig saved to fig/{:}_cycle_year_dis.jpg'.format(field))
 
 
+### 根据citation network, 年份, scc生成SCC的citation network的数据和对应节点的年份
+def scc_network(field):
+
+    field = '_'.join(field.split())
+    cycles_path = 'data/sccs_{:}.txt_bak'.format(field)
+    paper_year_path = 'data/year_{:}.json'.format(field)
+    citation_network_path = 'data/citation_network_{:}.txt'.format(field)
+
+    paper_year = json.loads(open(paper_year_path).read())
+
+    ## 首先得到所有在scc中的文章节点
+    pids = []
+
+    for line in open(cycles_path):
+        line = line.strip()
+        pids.extend(line.split(','))
+
+    pids = set(pids)
+    logging.info('there are {:} papers in sccs'.format(len(pids)))
+
+
+    ### 或者所有文章相关的citation relations
+    scc_relations = []
+
+    ##SCC中本学科的年份
+    scc_node_year = {}
+    for line in open(citation_network_path):
+
+        line = line.strip()
+
+        citing_pid,cited_pid = line.split(',')
+
+
+        if citing_pid in pids and cited_pid in pids:
+
+            if citing_pid == cited_pid:
+                continue
+
+            ## 把所有没有年份的，就是本学科之外的删除，所有本学科的都有年份
+            if paper_year.get(citing_pid,-1):
+                continue
+
+            if paper_year.get(cited_pid,-1):
+                continue
+
+            ## 本学科的年份
+            scc_node_year[citing_pid] = paper_year[citing_pid]
+            scc_node_year[cited_pid] = paper_year[cited_pid]
+
+
+            scc_relations.append(line)
+
+    open('data/scc_relations_{:}.txt'.format(field))
+
+    logging.info('scc relations saved to data/scc_relations_{:}.txt'.format(field))
+
+    open('data/scc_year_{:}.txt'.format(field),'w').write(json.dumps(scc_node_year))
+
+    logging.info('scc node year saved to data/scc_year_{:}.txt'.format(field))
+
+## 根据scc network以及年份， 去掉被引-引证年份<-3的论文
+
+def new_from_scc_network(field):
+    field = '_'.join(field.split())
+
+    scc_relations_path = 'data/scc_relations_{:}.txt'.format(field)
+    scc_year_path = 'data/scc_year_{:}.txt'.format(field)
+
+    scc_year = json.loads(open(scc_year_path).read())
+
+    edges = []
+    for line in open(scc_relations_path):
+        line = line.strip()
+
+        citing_pid,cited_pid = line.split(',')
+
+        ## 如果被引文献比引证文献晚3年以上
+        if int(scc_year[cited_pid]) - int(scc_year[citing_pid]) >= 3:
+            continue
+
+        edges.append([citing_pid,cited_pid])
+
+    logging.info('{:} filtered edges...'.format(len(edges)))
+    ## 根据过滤之后的node进行构建network
+
+    logging.info('start to generate directed graph ...')
+    cc = nx.DiGraph()
+    cc.add_edges_from(edges)
+
+    logging.info('directed graph created ...')
+
+    logging.info('start to detect strongly connected components ...')
+
+    sccs = []
+    for c in nx.strongly_connected_components(cc):
+        if len(c)==1:
+            continue
+        sccs.append(','.join(c))
+
+    logging.info('Scc detection complete, {:} sccs are detected.'.format(len(sccs)))
+
+
+    open('data/sccs_{:}.txt'.format(field),'w').write('\n'.join(sccs))
+
+    logging.info('Sccs saved to data/sccs_{:}.txt.'.format(field))
+
+
+
+
 ### 构建特定领域的引文网络
 def generate_cc_of_field(field):
     filter_ids_of_field(field)
@@ -305,29 +414,54 @@ def generate_cc_of_field(field):
 
 if __name__ == '__main__':
 
-    # generate_cc_of_field('physics')
 
-    # generate_cc_of_field('computer science')
 
     if int(sys.argv[1])==0:
+        ## 构建citation network
+        # generate_cc_of_field('physics')
 
+        ## 第一轮生成scc
         # find_scc_from_citation_network('physics')
 
-        fecth_pubyear_of_com_ids('physics')
+        ## 获得该领域论文的published year
+        # fecth_pubyear_of_com_ids('physics')
 
+
+        ## 根据 scc获得network的子集,以及published year的子集以便于下载
+        scc_network('physics')
+
+        ## 根据子集过滤掉中其领域的文章以及cited_paper比citing paper晚三年的关系，生成新的scc
+        new_from_scc_network('physics')
+
+        ## SCC的size 分布
         cycle_size_distribution('physics')
 
+        ## SCC的最大年份差分布，以及0年的时间分布
         cycle_year_difference_distribution('physics')
-        
+
 
     else:
 
+        ## 构建citation network
+        # generate_cc_of_field('computer science')
+
+        ## 第一轮生成scc
         # find_scc_from_citation_network('computer science')
 
+        ## 获得该领域论文的published year
         # fecth_pubyear_of_com_ids('computer science')
 
-        # cycle_size_distribution('computer science')
 
+        ## 根据 scc获得network的子集,以及published year的子集以便于下载
+        scc_network('computer science')
+
+        ## 根据子集过滤掉中其领域的文章以及cited_paper比citing paper晚三年的关系，生成新的scc
+        new_from_scc_network('computer science')
+
+        ## SCC的size 分布
+        cycle_size_distribution('computer science')
+
+        ## SCC的最大年份差分布，以及0年的时间分布
         cycle_year_difference_distribution('computer science')
 
 
