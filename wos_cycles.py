@@ -348,7 +348,7 @@ def scc_network(field):
 
             scc_relations.append(line)
 
-    open('data/scc_relations_{:}.txt'.format(field))
+    open('data/scc_relations_{:}.txt'.format(field),'w').write('\n'.join(scc_relations))
 
     logging.info('scc relations saved to data/scc_relations_{:}.txt'.format(field))
 
