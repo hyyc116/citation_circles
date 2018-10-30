@@ -300,7 +300,7 @@ def cycle_year_difference_distribution(field):
 def scc_network(field):
 
     field = '_'.join(field.split())
-    cycles_path = 'data/sccs_{:}.txt_bak'.format(field)
+    cycles_path = 'data/sccs_{:}.txt'.format(field)
     paper_year_path = 'data/year_{:}.json'.format(field)
     citation_network_path = 'data/citation_network_{:}.txt'.format(field)
 
