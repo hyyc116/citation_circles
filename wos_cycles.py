@@ -317,6 +317,9 @@ if __name__ == '__main__':
 
         cycle_size_distribution('physics')
 
+        cycle_year_difference_distribution('physics')
+        
+
     else:
 
         # find_scc_from_citation_network('computer science')
