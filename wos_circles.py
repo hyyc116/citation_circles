@@ -96,6 +96,7 @@ def scc_stats(pathObj):
 
     size_xs = []
     size_ys = []
+    # total_num = 0
     for size in sorted(size_dict.keys()):
         size_xs.append(size)
         size_ys.append(size_dict[size])
@@ -106,6 +107,8 @@ def scc_stats(pathObj):
     ax1.set_xlabel('size of SCC\n(b)')
     ax1.set_ylabel('number of SCC')
     ax1.set_title('processed ({:})'.format(pathObj._dataset))
+
+    logging.info('total number of papers in SCC is {:}.'.format(np.sum(sizes)))
 
 
     plt.tight_layout()
