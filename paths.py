@@ -28,8 +28,13 @@ class PATHS:
         ## 领域内所有文章的JSON文件
         self._YearJson = 'data/year_{:}.json'.format(self._name)
 
-        ##强联通量的存放文件
+        ##强联通量的存放文件,去掉三年以后的结果
         self._sccs = 'data/sccs_{:}.txt'.format(self._name)
+        ## 没有去掉三年的结果
+        self._sccs_bak = 'data/sccs_{:}.txt_bak'.format(self._name)
+        ## 对比的Size图
+        self._compare_size = 'fig/scc_size_compare_{:}.jpg'.format(self._name)
+
 
         ## 强连通量中节点相关的文件
         self._relations = 'data/scc_relations_{:}.txt'.format(self._name)
