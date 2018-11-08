@@ -18,8 +18,8 @@ from basic_config import *
 def filter_ids_of_field(field):
     logging.info('filter out paper ids from wos_subjects of field:[{:}].'.format('_'.join(field.split())))
     selected_IDs = []
-    
-    ## query database 
+
+    ## query database
     query_op = dbop()
 
     sql = 'select id,subject from wos_subjects'
@@ -31,7 +31,7 @@ def filter_ids_of_field(field):
         if progress%10000000==0:
             logging.info('progress {:} .... ' .format(progress))
 
-            
+
         if field in subject.lower():
             selected_IDs.append(str(fid))
             subjects.append(subject.lower())
@@ -75,7 +75,7 @@ def fetch_citation_network(selected_IDs_path,field):
         progress+=1
         if progress%10000000==0:
             logging.info('total progress {:} ...'.format(progress))
-        
+
         if ref_id in selected_IDs or pid in selected_IDs:
             lines.append('{:},{:}'.format(pid,ref_id))
 
@@ -96,6 +96,13 @@ def fetch_citation_network(selected_IDs_path,field):
     logging.info('{:} citation relations in citation network saved to data/citation_network_{:}.txt.'.format(num_of_relations,field))
 
     query_op.close_db()
+
+### 构建特定领域的引文网络
+def generate_cc_of_field(field):
+    filter_ids_of_field(field)
+    _ids_path = 'data/selected_IDs_from_{:}.txt'.format('_'.join(field.split()))
+    fetch_citation_network(_ids_path,field)
+
 
 def fecth_pubyear_of_com_ids(field):
     field = '_'.join(field.split())
@@ -221,7 +228,7 @@ def cycle_year_difference_distribution(pathObj):
         line = line.strip()
         years = []
         cycle = line.split(',')
-        for p in cycle: 
+        for p in cycle:
             year = int(pid_year.get(p,-1))
             if year==-1:
                 # print p
@@ -236,7 +243,7 @@ def cycle_year_difference_distribution(pathObj):
             continue
 
         yd = np.max(years)-np.min(years)
-        
+
         if yd > 0:
             logging.info('yd:{:},size:{:}'.format(yd,len(years)))
 
@@ -245,7 +252,7 @@ def cycle_year_difference_distribution(pathObj):
 
 
         year_differences[yd]+=1
-    
+
     logging.info('{:} of papers are not found.'.format(len(num)))
 
     # open('data/aps_all_ny_dois.txt','w').write('\n'.join(num))
@@ -447,14 +454,6 @@ def check_accuracy_of_scc(pathObj):
     logging.info('finished')
 
 
-
-### 构建特定领域的引文网络
-def generate_cc_of_field(field):
-    filter_ids_of_field(field)
-    _ids_path = 'data/selected_IDs_from_{:}.txt'.format('_'.join(field.split()))
-    fetch_citation_network(_ids_path,field)
-
-
 if __name__ == '__main__':
 
 
@@ -528,4 +527,4 @@ if __name__ == '__main__':
 
 
 
-  
+

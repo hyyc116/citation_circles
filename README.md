@@ -1,2 +1,5 @@
-# citation_cycles
-Detect citation cycles from citation network.
+# citation_circles
+Detect citation circles in citation network.
+
+
+
