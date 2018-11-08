@@ -31,8 +31,8 @@ def statistics_of_cc(pathObj):
     for line in open(pathObj._CRs):
         cr = line.strip()
         citing_pid,cited_pid = cr.split(',')
-        citing_year = yearJson.get(citing_pid,-1)
-        cited_year = yearJson.get(cited_pid,-1)
+        citing_year = int(yearJson.get(citing_pid,-1))
+        cited_year = int(yearJson.get(cited_pid,-1))
 
         if citing_year ==-1 or cited_year==-1:
             continue
