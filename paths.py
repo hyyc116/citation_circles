@@ -47,6 +47,12 @@ class PATHS:
         ##强联通量的年份
         self._years = 'data/scc_year_{:}.txt'.format(self._name)
 
+
+        ### 四个统计量的图形位置
+        self._stats_fig = 'fig/scc_stats_{:}.jpg'.format(self._name)
+        self._stats_fig_data = 'fig/data/scc_stats_data_{:}.json'.format(self._name)
+
+
         ## 强联通量的子图存放地址
         self._subgraph = 'fig/subgraph/scc_subgraph_{:}_'.format(self._name)
 
