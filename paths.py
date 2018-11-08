@@ -16,6 +16,11 @@ class PATHS:
         ## 保存的名
         self._name = '_'.join(field.split())
 
+        if field=='physics':
+            self._dataset = 'WOS-P'
+        else:
+            self._dataset = 'WOS-CS'
+
         ## 各个领域所属文章的ID列表文件
         self._IDs = 'data/selected_IDs_from_{:}.txt'.format(self._name)
 

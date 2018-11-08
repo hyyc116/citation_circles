@@ -84,7 +84,7 @@ def scc_stats(pathObj):
     ax0.set_yscale('log')
     ax0.set_xlabel('size of SCC')
     ax0.set_ylabel('number of SCC')
-    ax0.set_title('before removing')
+    ax0.set_title('original ({:})\n(a)'.format(pathObj._dataset))
 
 
     ax1 = axes[1]
@@ -105,7 +105,8 @@ def scc_stats(pathObj):
     ax1.set_yscale('log')
     ax1.set_xlabel('size of SCC')
     ax1.set_ylabel('number of SCC')
-    ax1.set_title('before removing')
+    ax0.set_title('processed ({:})\n(b)'.format(pathObj._dataset))
+
 
     plt.tight_layout()
     plt.savefig(pathObj._compare_size)
