@@ -117,13 +117,12 @@ if __name__ == '__main__':
 
         pathObj = PATHS('physics')
 
-        statistics_of_cc(pathObj)
-
     else:
 
         pathObj = PATHS('computer science')
 
-        statistics_of_cc(pathObj)
+    # statistics_of_cc(pathObj)
+    scc_stats(pathObj)
 
 
 
