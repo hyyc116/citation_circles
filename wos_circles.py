@@ -82,9 +82,9 @@ def scc_stats(pathObj):
     ax0.plot(size_xs,size_ys,'-o')
     ax0.set_xscale('log')
     ax0.set_yscale('log')
-    ax0.set_xlabel('size of SCC')
+    ax0.set_xlabel('size of SCC\n(a)')
     ax0.set_ylabel('number of SCC')
-    ax0.set_title('original ({:})\n(a)'.format(pathObj._dataset))
+    ax0.set_title('original ({:})'.format(pathObj._dataset))
 
 
     ax1 = axes[1]
@@ -103,9 +103,9 @@ def scc_stats(pathObj):
     ax1.plot(size_xs,size_ys,'-o')
     ax1.set_xscale('log')
     ax1.set_yscale('log')
-    ax1.set_xlabel('size of SCC')
+    ax1.set_xlabel('size of SCC\n(b)')
     ax1.set_ylabel('number of SCC')
-    ax0.set_title('processed ({:})\n(b)'.format(pathObj._dataset))
+    ax1.set_title('processed ({:})'.format(pathObj._dataset))
 
 
     plt.tight_layout()
