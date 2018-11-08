@@ -155,7 +155,7 @@ def scc_stats(pathObj):
     logging.info('Year difference ....')
     ## year difference
     ax1 = axes[1]
-    yearJson = json.loads(open(pathObj._years))
+    yearJson = json.loads(open(pathObj._years).read())
 
     yds = []
     yd_year_count = defaultdict(lambda:defaultdict(int))
