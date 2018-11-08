@@ -17,7 +17,7 @@ from networkx.algorithms import isomorphism
 from collections import Counter
 import matplotlib as mpl
 import matplotlib.colors as colors
-
+from cycler import cycler
 
 '''
 ==================
