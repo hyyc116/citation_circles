@@ -34,7 +34,7 @@ from networkx.algorithms.core import core_number
 from networkx.algorithms.core import k_core
 import psycopg2
 
-# from viz_graph import *
+from viz_graph import *
 # from gini import gini
 
 
@@ -46,7 +46,7 @@ color_sequence = ['#1f77b4', '#aec7e8', '#ff7f0e', '#ffbb78', '#2ca02c',
 	   	   	   		 '#8c564b', '#c49c94', '#e377c2', '#f7b6d2', '#7f7f7f',
 	   	   	   		 '#c7c7c7', '#bcbd22', '#dbdb8d', '#17becf', '#9edae5']
 
-logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s',level=logging.DEBUG)
+logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s',level=logging.INFO)
 PREFIX='all'
 PROGRAM_ID='cascade'
 FIGDIR='pdf'
@@ -92,6 +92,25 @@ def autolabel(rects,ax,total_count=None,step=1,):
 	   	   	   ax.text(rect.get_x() + rect.get_width()/2., 1.005*height,
 	   	   	   	   	   '{:}'.format(int(height)),
 	   	   	   	   	   ha='center', va='bottom')
+
+
+class PATHS:
+
+	def __init__(self,field):
+
+		self._name = '_'.join(field.split())
+
+		self._sccs = 'data/sccs_{:}.txt'.format(self._name)
+
+		self._relations = 'data/scc_relations_{:}.txt'.format(self._name)
+
+		self._years = 'data/scc_year_{:}.txt'.format(self._name)
+
+		self._subgraph = 'fig/subgraph/scc_subgraph_{:}_'.format(self._name)
+
+		self._random_100 = 'data/scc_rn100_{:}.txt'.format(self._name)
+
+
 
 
 class dbop:

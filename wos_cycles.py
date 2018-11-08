@@ -170,10 +170,10 @@ def find_scc_from_citation_network(field):
 
 
 ## cycle大小的分布
-def cycle_size_distribution(field):
+def cycle_size_distribution(pathObj):
     # cycles = []
-    field = '_'.join(field.split())
-    cycles_path = 'data/sccs_{:}.txt'.format(field)
+    cycles_path = pathObj._sccs
+
     size_dis = defaultdict(int)
     for line in open(cycles_path):
 
@@ -198,16 +198,16 @@ def cycle_size_distribution(field):
 
     plt.tight_layout()
 
-    plt.savefig('fig/{:}_cycle_size_dis.jpg'.format(field),dpi=200)
+    plt.savefig('fig/{:}_cycle_size_dis.jpg'.format(pathObj._name),dpi=200)
 
-    logging.info('cycle size distribution fig saved to fig/{:}_cycle_size_dis.jpg'.format(field))
+    logging.info('cycle size distribution fig saved to fig/{:}_cycle_size_dis.jpg'.format(pathObj._name))
 
 
-def cycle_year_difference_distribution(field):
+def cycle_year_difference_distribution(pathObj):
 
-    field = '_'.join(field.split())
-    cycles_path = 'data/sccs_{:}.txt'.format(field)
-    paper_year_path = 'data/year_{:}.json'.format(field)
+    # field = '_'.join(field.split())
+    cycles_path = pathObj._sccs
+    paper_year_path = pathObj._years
 
     year_differences = defaultdict(int)
     num=[]
@@ -268,9 +268,9 @@ def cycle_year_difference_distribution(field):
 
     plt.tight_layout()
 
-    plt.savefig('fig/{:}_cycle_year_difference_dis.jpg'.format(field),dpi=200)
+    plt.savefig('fig/{:}_cycle_year_difference_dis.jpg'.format(pathObj._name),dpi=200)
 
-    logging.info('cycle year difference distribution fig saved to fig/{:}_cycle_year_difference_dis.jpg'.format(field))
+    logging.info('cycle year difference distribution fig saved to fig/{:}_cycle_year_difference_dis.jpg'.format(pathObj._name))
 
 
     xs = []
@@ -291,9 +291,9 @@ def cycle_year_difference_distribution(field):
 
     plt.tight_layout()
 
-    plt.savefig('fig/{:}_cycle_year_dis.jpg'.format(field),dpi=200)
+    plt.savefig('fig/{:}_cycle_year_dis.jpg'.format(pathObj._name),dpi=200)
 
-    logging.info('cycle year distribution fig saved to fig/{:}_cycle_year_dis.jpg'.format(field))
+    logging.info('cycle year distribution fig saved to fig/{:}_cycle_year_dis.jpg'.format(pathObj._name))
 
 
 ### 根据citation network, 年份, scc生成SCC的citation network的数据和对应节点的年份
@@ -404,6 +404,49 @@ def new_from_scc_network(field):
 
 
 
+###随机选择100个SCC查证准确率
+def check_accuracy_of_scc(pathObj):
+
+    edges = []
+
+    for line in open(pathObj._relations):
+
+        line = line.strip()
+
+        citing_pid,cited_pid = line.split(',')
+
+        edges.append([citing_pid,cited_pid])
+
+    ## 创建graph
+
+    dig = nx.DiGraph()
+    dig.add_edges_from(edges)
+
+    logging.info('total directed graph created success.')
+
+    ## 根据scc进行subgraph的可视化
+    lines = [line.strip() for line in open(pathObj._sccs)]
+
+    _100_sccs = np.random.choice(lines,100)
+
+    open(pathObj._random_100,'w').write('\n'.join(_100_sccs))
+
+    ## 可视化100个子图
+    for i,scc in enumerate(_100_sccs):
+
+        scc = scc.split(',')
+
+        logging.info('plot subgraph {:} ...'.format(i))
+        ## 子图
+        subgraph = dig.subgraph(scc)
+
+        # print subgraph.edges
+        ## 对每个subgraph进行可视化
+        plot_a_subcascade(subgraph.edges,pathObj._subgraph+str(i),format='pdf')
+
+    logging.info('finished')
+
+
 
 ### 构建特定领域的引文网络
 def generate_cc_of_field(field):
@@ -417,6 +460,7 @@ if __name__ == '__main__':
 
 
     if int(sys.argv[1])==0:
+
         ## 构建citation network
         # generate_cc_of_field('physics')
 
@@ -426,18 +470,21 @@ if __name__ == '__main__':
         ## 获得该领域论文的published year
         # fecth_pubyear_of_com_ids('physics')
 
+        # ## 根据 scc获得network的子集,以及published year的子集以便于下载
+        # scc_network('physics')
 
-        ## 根据 scc获得network的子集,以及published year的子集以便于下载
-        scc_network('physics')
+        # ## 根据子集过滤掉中其领域的文章以及cited_paper比citing paper晚三年的关系，生成新的scc
+        # new_from_scc_network('physics')
 
-        ## 根据子集过滤掉中其领域的文章以及cited_paper比citing paper晚三年的关系，生成新的scc
-        new_from_scc_network('physics')
+        pathObj = PATHS('physics')
+
+        check_accuracy_of_scc(pathObj)
 
         ## SCC的size 分布
-        cycle_size_distribution('physics')
+        cycle_size_distribution(pathObj)
 
         ## SCC的最大年份差分布，以及0年的时间分布
-        cycle_year_difference_distribution('physics')
+        cycle_year_difference_distribution(pathObj)
 
 
     else:
@@ -452,21 +499,22 @@ if __name__ == '__main__':
         # fecth_pubyear_of_com_ids('computer science')
 
 
-        ## 根据 scc获得network的子集,以及published year的子集以便于下载
-        scc_network('computer science')
+        # ## 根据 scc获得network的子集,以及published year的子集以便于下载
+        # scc_network('computer science')
 
-        ## 根据子集过滤掉中其领域的文章以及cited_paper比citing paper晚三年的关系，生成新的scc
-        new_from_scc_network('computer science')
+        # ## 根据子集过滤掉中其领域的文章以及cited_paper比citing paper晚三年的关系，生成新的scc
+        # new_from_scc_network('computer science')
+
+
+        pathObj = PATHS('computer science')
+
+        check_accuracy_of_scc(pathObj)
 
         ## SCC的size 分布
-        cycle_size_distribution('computer science')
+        cycle_size_distribution(pathObj)
 
         ## SCC的最大年份差分布，以及0年的时间分布
-        cycle_year_difference_distribution('computer science')
-
-
-
-    
+        cycle_year_difference_distribution(pathObj)
 
 
 

@@ -91,7 +91,7 @@ def plot_a_subcascade(edges,name,shape='circle',format='jpg'):
     p.attr('edge',arrowhead='open')
     p.attr('graph',rankdir = 'RL')
     for e in edges:
-        p.edge(e[0],e[1],style='dashed')
+        p.edge(e[0].replace(':',"_"),e[1].replace(':','_'),style='dashed')
 
     p.render(name)
 
