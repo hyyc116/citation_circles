@@ -4,7 +4,6 @@ import sys
 import json
 from collections import defaultdict
 from collections import Counter
-matplotlib.use('Agg')
 import math
 import numpy as np
 import random
