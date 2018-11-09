@@ -59,3 +59,21 @@ Detect citation circles in citation network.
 |18|![pattern](fig/patterns/scc_pattern_physics_18.jpg)|10|4|![yd](fig/yds/scc_yd_physics_18.jpg)|![cs](fig/cs/scc_cs_physics_18.jpg)|
 |19|![pattern](fig/patterns/scc_pattern_physics_19.jpg)|9|4|![yd](fig/yds/scc_yd_physics_19.jpg)|![cs](fig/cs/scc_cs_physics_19.jpg)|
 
+
+## SOURCE ANALYSIS
+
+analyze relationships between authors, issues, institutes of papers in one SCC.
+
+### Author
+
+
+### Issue
+
+
+### Institute
+
+
+
+
+
+
