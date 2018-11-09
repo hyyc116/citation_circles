@@ -120,7 +120,7 @@ def scc_stats(pathObj):
 
     logging.info("start to draw stats fig ...")
 
-    fig,axes = plt.subplots(4,1,figsize=(6,20))
+    fig,axes = plt.subplots(4,1,figsize=(6,16))
 
     data = []
     logging.info('Distribution of SCC Size ...')
@@ -142,7 +142,7 @@ def scc_stats(pathObj):
     fig_data = {}
     fig_data['x'] = xs
     fig_data['y'] = ys
-    fig_data['title'] = 'Size of SCC'
+    fig_data['title'] = '\n\nSize of SCC'
     fig_data['xlabel'] = 'Size of SCC\n(a)'
     fig_data['ylabel'] = 'Number of SCC'
     fig_data['xscale'] = 'log'
@@ -159,6 +159,7 @@ def scc_stats(pathObj):
 
     yds = []
     yd_year_count = defaultdict(lambda:defaultdict(int))
+    sizes=[]
     for scc in sccs:
         years = []
         for pid in scc:
@@ -172,6 +173,7 @@ def scc_stats(pathObj):
         yd_year_count[yd][my]+=1
 
         yds.append(yd)
+        sizes.append(len(scc))
 
     yd_dict = Counter(yds)
 
@@ -189,7 +191,7 @@ def scc_stats(pathObj):
     fig_data['title'] = 'Year Difference'
     fig_data['xlabel'] = 'Year Differnece\n(b)'
     fig_data['ylabel'] = 'Number of SCC'
-    fig_data['xscale'] = 'log'
+    # fig_data['xscale'] = 'log'
     fig_data['yscale'] = 'log'
     fig_data['marker'] = '-o'
     fig_data['xtick'] = True
@@ -207,7 +209,7 @@ def scc_stats(pathObj):
     fig_data['xlabel'] = 'year\n(c)'
     fig_data['ylabel'] = 'Number of SCC'
     # fig_data['xscale'] = 'log'
-    # fig_data['yscale'] = 'log'
+    fig_data['yscale'] = 'log'
     # fig_data['marker'] = '-o'
 
     xlist = []
@@ -216,7 +218,7 @@ def scc_stats(pathObj):
     labels = []
     for i,yd in enumerate(sorted(yd_year_count.keys())):
 
-        markers.append(_ALL_MARKERS[i])
+        markers.append(ALL_MARKERS[i])
         year_count = yd_year_count[yd]
         labels.append('N={:}'.format(yd))
 
@@ -229,8 +231,8 @@ def scc_stats(pathObj):
         xlist.append(xs)
         ylist.append(ys)
 
-    fig_data['xses'] = xlist
-    fig_data['yses'] = ylist
+    fig_data['xs'] = xlist
+    fig_data['ys'] = ylist
     fig_data['markers'] = markers
     fig_data['labels'] = labels
     plot_multi_lines_from_two_data(fig_data,ax2)
@@ -249,11 +251,14 @@ def scc_stats(pathObj):
     fig_data['xlabel'] = 'Size of SCC\n(d)'
     fig_data['ylabel'] = 'Year Differnece'
     fig_data['xscale'] = 'log'
-    fig_data['yscale'] = 'log'
+    # fig_data['yscale'] = 'log'
     fig_data['marker'] = 'o'
+    # fig_data['xtick']=True
 
-    plot_line_from_data(fig_data,ax3)
+    plot_scatter_from_data(fig_data,ax3)
     data.append(fig_data)
+
+    plt.suptitle(pathObj._dataset,fontsize=20,weight='bold')
 
     plt.tight_layout()
 
@@ -263,6 +268,171 @@ def scc_stats(pathObj):
 
     open(pathObj._stats_fig_data,'w').write(json.dumps({'data':data}))
     logging.info('data of fig saved to {:}.'.format(pathObj._stats_fig_data))
+
+
+##iso_pattern
+def iso(pattern_id,_id_pattern,graph):
+
+    num_of_pattern = len(_id_pattern.keys())
+
+    # size = len(graph.nodes())
+    # pat_id  = pattern_id.get(size,{})
+    is_iso = False
+    for pattern in pattern_id.keys():
+        if nx.is_isomorphic(graph,pattern):
+            is_iso=True
+            _id = pattern_id[pattern]
+            break
+
+    if not is_iso:
+        _id = num_of_pattern
+        pattern_id[graph] = _id
+        _id_pattern[_id] = list(graph.edges())
+
+    return pattern_id,_id_pattern,_id
+
+
+## 对SCC的pattern进行分析
+def scc_patterns(pathObj):
+
+    yearJson = json.loads(open(pathObj._years).read())
+
+    sccs = [line.strip().split(',') for line in open(pathObj._sccs)]
+
+    edges = [line.strip().split(',') for line in open(pathObj._relations)]
+
+    dig = nx.DiGraph()
+    dig.add_edges_from(edges)
+
+    pattern_id = defaultdict(int)
+    _id_pattern = {}
+
+    _id_attrs = defaultdict(list)
+    progress = 0
+    for scc in sccs:
+
+        progress+=1
+
+        if progress%10==0:
+
+            logging.info('progress {:} ...'.format(progress))
+
+        size = len(scc)
+
+        if size >10:
+            continue
+
+        years = [int(yearJson[pid]) for pid in scc]
+        yd = np.max(years)-np.min(years)
+
+        subgraph = nx.DiGraph()
+        subgraph.add_edges_from(list(dig.subgraph(scc).edges))
+
+        ## simple circles
+        circle_sizes = []
+        for circle in nx.simple_cycles(subgraph):
+            circle_sizes.append(len(circle))
+
+        pattern_id,_id_pattern,_id = iso(pattern_id,_id_pattern,subgraph)
+
+        _id_attrs[_id].append([size,yd,circle_sizes])
+
+    open(pathObj._id_patterns,'w').write(json.dumps(_id_pattern))
+    logging.info('{:} patterns saved to {:}.'.format(len(_id_pattern.keys()),pathObj._id_patterns))
+    open(pathObj._id_attrs,'w').write(json.dumps(_id_attrs))
+    logging.info('id attrs saved to {:}.'.format(pathObj._id_attrs))
+
+### 把频次最高的20个pattern画出来
+def top_pattern_plot(pathObj):
+
+    _id_pattern = json.loads(open(pathObj._id_patterns).read())
+    _id_attrs = json.loads(open(pathObj._id_attrs).read())
+
+    ###出现频次最高的20个
+    lines = ['|index|pattern_path|freq|size|yd_path|cs_path|','| ------: | :------: | ------: | ------: | :------: | :------: |']
+    # html = '<table>'
+    # html+='<tr> <td>index</td> <td>pattern</td> <td>Frequency</td> <td>Size</td> <td>YD Distribution</td> <td>Citation Circle</td></tr>'
+    for i,_id in enumerate(sorted(_id_attrs.keys(),key=lambda x:len(_id_attrs[x]),reverse=True)[:20]):
+
+        logging.info('plot {:}th pattern ...'.format(i))
+
+        ## 出现的次数
+        attrs = _id_attrs[_id]
+        freq = len(attrs)
+        _s,yds,cses = zip(*attrs)
+        edges = _id_pattern[_id]
+
+        plot_a_subcascade(edges,pathObj._top_patterns+str(i),shape='point',format='jpg')
+
+        ##pattern的路径
+        pattern_path = pathObj._top_patterns+str(i)+'.jpg'
+
+        ## size
+        dig = nx.DiGraph()
+        dig.add_edges_from(edges)
+        size = len(dig.nodes())
+
+        ##year difference distribution
+        yd_dict = Counter(yds)
+        xs = []
+        ys = []
+        for yd in sorted(yd_dict.keys()):
+            xs.append(yd)
+            ys.append(yd_dict[yd])
+
+
+        fig_data = {}
+        fig_data['x'] = xs
+        fig_data['y'] = ys
+        fig_data['xlabel'] = 'year\n(c)'
+        fig_data['ylabel'] = 'Number of SCC'
+        fig_data['yscale'] = 'log'
+        plt.figure()
+        plot_bar_from_data(fig_data)
+        plt.tight_layout()
+        yd_path = pathObj._top_yds+str(i)+".jpg"
+        plt.savefig(yd_path,dpi=300)
+
+
+        ## circle size distribution
+        cs = cses[0]
+        cs_dict = Counter(cs)
+
+        xs = []
+        ys = []
+        for cs in sorted(cs_dict.keys()):
+            xs.append(cs)
+            ys.append(cs_dict[cs])
+
+        fig_data = {}
+        fig_data['x'] = xs
+        fig_data['y'] = ys
+        fig_data['xlabel'] = 'year\n(c)'
+        fig_data['ylabel'] = 'Number of SCC'
+        fig_data['yscale'] = 'log'
+        plt.figure()
+        plot_bar_from_data(fig_data)
+        plt.tight_layout()
+        cs_path = pathObj._top_cs+str(i)+".jpg"
+        plt.savefig(yd_path,dpi=300)
+
+
+        line = '|{:}|![pattern]({:})|{:}|{:}|![yd]({:})|![cs]({:})|'.format(i,pattern_path,freq,size,yd_path,cs_path)
+
+        lines.append(line)
+
+        # html+='<tr> <td>{:}</td> <td><src="{:}" width=100 height=50 alt="pattern figure"/></td> <td>{:}</td> <td>{:}</td> <td><src="{:}" width=100 height=50 alt="YD figure"/></td> <td><src="{:}" width=100 height=50 alt="CS figure"/></td></tr>'.format(i,pattern_path,freq,size,yd_path,cs_path)
+
+
+    # html+='</table>'
+    open(pathObj._csv,'w').write('\n'.join(lines))
+    logging.info('csv data saved to {:}.'.format(pathObj._csv))
+
+    # open(pathObj._table,'w').write(html)
+    # logging.info('table saved to {:}.'.format(pathObj._table))
+
+
+
 
 
 
@@ -278,7 +448,9 @@ if __name__ == '__main__':
 
     # statistics_of_cc(pathObj)
     # scc_compare(pathObj)
-    scc_stats(pathObj)
+    # scc_stats(pathObj)
+    # scc_patterns(pathObj)
+    top_pattern_plot(pathObj)
 
 
 

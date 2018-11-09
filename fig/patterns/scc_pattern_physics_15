@@ -1,0 +1,11 @@
+digraph {
+	node [fixedwith=true height=0.2 shape=point width=0.2]
+	edge [arrowhead=open]
+	graph [rankdir=RL]
+	WOS_000272244700004 -> WOS_000272244700005 [style=dashed]
+	WOS_000272244700004 -> WOS_000272244700002 [style=dashed]
+	WOS_000272244700005 -> WOS_000272244700004 [style=dashed]
+	WOS_000272244700005 -> WOS_000272244700011 [style=dashed]
+	WOS_000272244700011 -> WOS_000272244700005 [style=dashed]
+	WOS_000272244700002 -> WOS_000272244700004 [style=dashed]
+}

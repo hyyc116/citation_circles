@@ -3,3 +3,25 @@ Detect citation circles in citation network.
 
 
 
+|index|pattern_path|freq|size|yd_path|cs_path|
+| ------: | :------: | ------: | ------: | :------: | :------: |
+|0|![pattern](fig/patterns/scc_pattern_computer_science_0.jpg)|1379|2|![yd](fig/yds/scc_yd_computer_science_0.jpg)|![cs](fig/cs/scc_cs_computer_science_0.jpg)|
+|1|![pattern](fig/patterns/scc_pattern_computer_science_1.jpg)|54|3|![yd](fig/yds/scc_yd_computer_science_1.jpg)|![cs](fig/cs/scc_cs_computer_science_1.jpg)|
+|2|![pattern](fig/patterns/scc_pattern_computer_science_2.jpg)|50|3|![yd](fig/yds/scc_yd_computer_science_2.jpg)|![cs](fig/cs/scc_cs_computer_science_2.jpg)|
+|3|![pattern](fig/patterns/scc_pattern_computer_science_3.jpg)|37|3|![yd](fig/yds/scc_yd_computer_science_3.jpg)|![cs](fig/cs/scc_cs_computer_science_3.jpg)|
+|4|![pattern](fig/patterns/scc_pattern_computer_science_4.jpg)|17|3|![yd](fig/yds/scc_yd_computer_science_4.jpg)|![cs](fig/cs/scc_cs_computer_science_4.jpg)|
+|5|![pattern](fig/patterns/scc_pattern_computer_science_5.jpg)|8|4|![yd](fig/yds/scc_yd_computer_science_5.jpg)|![cs](fig/cs/scc_cs_computer_science_5.jpg)|
+|6|![pattern](fig/patterns/scc_pattern_computer_science_6.jpg)|4|4|![yd](fig/yds/scc_yd_computer_science_6.jpg)|![cs](fig/cs/scc_cs_computer_science_6.jpg)|
+|7|![pattern](fig/patterns/scc_pattern_computer_science_7.jpg)|3|4|![yd](fig/yds/scc_yd_computer_science_7.jpg)|![cs](fig/cs/scc_cs_computer_science_7.jpg)|
+|8|![pattern](fig/patterns/scc_pattern_computer_science_8.jpg)|3|4|![yd](fig/yds/scc_yd_computer_science_8.jpg)|![cs](fig/cs/scc_cs_computer_science_8.jpg)|
+|9|![pattern](fig/patterns/scc_pattern_computer_science_9.jpg)|3|5|![yd](fig/yds/scc_yd_computer_science_9.jpg)|![cs](fig/cs/scc_cs_computer_science_9.jpg)|
+|10|![pattern](fig/patterns/scc_pattern_computer_science_10.jpg)|3|4|![yd](fig/yds/scc_yd_computer_science_10.jpg)|![cs](fig/cs/scc_cs_computer_science_10.jpg)|
+|11|![pattern](fig/patterns/scc_pattern_computer_science_11.jpg)|3|4|![yd](fig/yds/scc_yd_computer_science_11.jpg)|![cs](fig/cs/scc_cs_computer_science_11.jpg)|
+|12|![pattern](fig/patterns/scc_pattern_computer_science_12.jpg)|3|4|![yd](fig/yds/scc_yd_computer_science_12.jpg)|![cs](fig/cs/scc_cs_computer_science_12.jpg)|
+|13|![pattern](fig/patterns/scc_pattern_computer_science_13.jpg)|3|4|![yd](fig/yds/scc_yd_computer_science_13.jpg)|![cs](fig/cs/scc_cs_computer_science_13.jpg)|
+|14|![pattern](fig/patterns/scc_pattern_computer_science_14.jpg)|3|3|![yd](fig/yds/scc_yd_computer_science_14.jpg)|![cs](fig/cs/scc_cs_computer_science_14.jpg)|
+|15|![pattern](fig/patterns/scc_pattern_computer_science_15.jpg)|2|4|![yd](fig/yds/scc_yd_computer_science_15.jpg)|![cs](fig/cs/scc_cs_computer_science_15.jpg)|
+|16|![pattern](fig/patterns/scc_pattern_computer_science_16.jpg)|2|4|![yd](fig/yds/scc_yd_computer_science_16.jpg)|![cs](fig/cs/scc_cs_computer_science_16.jpg)|
+|17|![pattern](fig/patterns/scc_pattern_computer_science_17.jpg)|2|4|![yd](fig/yds/scc_yd_computer_science_17.jpg)|![cs](fig/cs/scc_cs_computer_science_17.jpg)|
+|18|![pattern](fig/patterns/scc_pattern_computer_science_18.jpg)|2|4|![yd](fig/yds/scc_yd_computer_science_18.jpg)|![cs](fig/cs/scc_cs_computer_science_18.jpg)|
+|19|![pattern](fig/patterns/scc_pattern_computer_science_19.jpg)|1|4|![yd](fig/yds/scc_yd_computer_science_19.jpg)|![cs](fig/cs/scc_cs_computer_science_19.jpg)|

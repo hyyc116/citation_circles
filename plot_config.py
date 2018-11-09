@@ -13,6 +13,7 @@ import matplotlib as mpl
 import matplotlib.colors as colors
 from cycler import cycler
 import pylab
+import numpy as np
 
 
 #### 显示中文的设置
@@ -22,21 +23,20 @@ import pylab
 # mpl.rcParams['axes.unicode_minus'] = False
 
 
-_ALL_MARKERS = ['-.','-o','-v','-^','-s','-p','-P','-*','-h','-H','-<','-+','-x','-X','->','-D','-d','-|','-1','-2','-3','-4','-8']
-
+ALL_MARKERS = ['-o','-v','-^','-s','-p','-P','-*','-h','-H','-<','-+','-x','-X','->','-D','-d','-|','-1','-2','-3','-4','-8']
 
 ## 最大的chunksize
 mpl.rcParams['agg.path.chunksize'] = 10000
 
-## 颜色循环，取代默认的颜色
-color_sequence = ['#1f77b4', '#aec7e8', '#ff7f0e', '#ffbb78', '#2ca02c','#98df8a', '#d62728', '#ff9896', '#9467bd', '#c5b0d5',
+# 颜色循环，取代默认的颜色
+color_sequence = ['#1f77b4',  '#ff7f0e', '#2ca02c', '#d62728', '#9467bd', '#c5b0d5',
                 '#8c564b', '#c49c94', '#e377c2', '#f7b6d2', '#7f7f7f',
-                '#c7c7c7', '#bcbd22', '#dbdb8d', '#17becf', '#9edae5']
+                '#c7c7c7', '#bcbd22', '#dbdb8d', '#17becf', '#9edae5', '#aec7e8', '#ffbb78','#98df8a', '#ff9896']
 
 mpl.rcParams['axes.prop_cycle'] = cycler('color', color_sequence)
 
-### 用特定的color theme进行画图
-# color = plt.cm.viridis(np.linspace(0.01,0.99,6)) # This returns RGBA; convert:
+## 用特定的color theme进行画图
+# color = plt.cm.viridis(np.linspace(0.1,0.9,6)) # This returns RGBA; convert:
 # hexcolor = map(lambda rgb:'#%02x%02x%02x' % (rgb[0]*255,rgb[1]*255,rgb[2]*255),
 #                tuple(color[:,0:-1]))
 
@@ -44,10 +44,10 @@ mpl.rcParams['axes.prop_cycle'] = cycler('color', color_sequence)
 
 ## 画图各种参数的大小
 params = {'legend.fontsize': 10,
-        'axes.labelsize': 15,
-        'axes.titlesize':20,
-        'xtick.labelsize':15,
-        'ytick.labelsize':15}
+        'axes.labelsize': 12,
+        'axes.titlesize':17,
+        'xtick.labelsize':12,
+        'ytick.labelsize':12}
 
 pylab.rcParams.update(params)
 
@@ -117,13 +117,53 @@ def plot_line_from_data(fig_data,ax=None):
             ax.set_xticks(xs)
             ax.set_xticklabels(xs)
 
+def plot_scatter_from_data(fig_data,ax=None):
+
+    xs = fig_data['x']
+    ys = fig_data['y']
+    title = fig_data['title']
+    xlabel = fig_data['xlabel']
+    ylabel = fig_data['ylabel']
+    marker = fig_data['marker']
+    xscale = fig_data.get('xscale','linear')
+    yscale = fig_data.get('yscale','linear')
+
+    xtick = fig_data.get('xtick',False)
+
+
+    if ax is None:
+
+        plt.scatter(xs,ys,marker=marker)
+        plt.xlabel(xlabel)
+        plt.ylabel(ylabel)
+        plt.xscale(xscale)
+        plt.yscale(yscale)
+        plt.title(title)
+
+        if xtick:
+            plt.xticks(xs,xs)
+
+        plt.tight_layout()
+
+    else:
+
+        ax.scatter(xs,ys,marker=marker)
+        ax.set_xlabel(xlabel)
+        ax.set_ylabel(ylabel)
+        ax.set_title(title)
+        ax.set_xscale(xscale)
+        ax.set_yscale(yscale)
+        if xtick:
+            ax.set_xticks(xs)
+            ax.set_xticklabels(xs)
+
 
 
 def plot_bar_from_data(fig_data,ax=None):
 
     xs = fig_data['x']
     ys = fig_data['y']
-    title = fig_data['title']
+    title = fig_data.get('title',None)
     xlabel = fig_data['xlabel']
     ylabel = fig_data['ylabel']
     xscale = fig_data.get('xscale','linear')
@@ -137,7 +177,8 @@ def plot_bar_from_data(fig_data,ax=None):
         plt.ylabel(ylabel)
         plt.xscale(xscale)
         plt.yscale(yscale)
-        plt.title(title)
+        if title is not None:
+            plt.title(title)
         plt.tight_layout()
 
     else:
@@ -145,7 +186,8 @@ def plot_bar_from_data(fig_data,ax=None):
         ax.bar(xs,ys,align='center')
         ax.set_xlabel(xlabel)
         ax.set_ylabel(ylabel)
-        ax.set_title(title)
+        if title is not None:
+            ax.set_title(title)
         ax.set_xscale(xscale)
         ax.set_yscale(yscale)
 

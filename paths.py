@@ -52,6 +52,15 @@ class PATHS:
         self._stats_fig = 'fig/scc_stats_{:}.jpg'.format(self._name)
         self._stats_fig_data = 'fig/data/scc_stats_data_{:}.json'.format(self._name)
 
+        ## pattern的统计量
+        self._id_patterns = 'data/scc_id_patterns_{:}.json'.format(self._name)
+        self._id_attrs = 'data/scc_id_attr_{:}.json'.format(self._name)
+        self._top_patterns = 'fig/patterns/scc_pattern_{:}_'.format(self._name)
+        self._top_yds = 'fig/yds/scc_yd_{:}_'.format(self._name)
+        self._top_cs = 'fig/cs/scc_cs_{:}_'.format(self._name)
+        self._csv = 'data/scc_csv_{:}.csv'.format(self._name)
+        self._table = 'scc_table_{:}.html'.format(self._name)
+
 
         ## 强联通量的子图存放地址
         self._subgraph = 'fig/subgraph/scc_subgraph_{:}_'.format(self._name)
