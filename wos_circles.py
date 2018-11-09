@@ -384,10 +384,10 @@ def top_pattern_plot(pathObj):
         fig_data = {}
         fig_data['x'] = xs
         fig_data['y'] = ys
-        fig_data['xlabel'] = 'year\n(c)'
-        fig_data['ylabel'] = 'Number of SCC'
+        fig_data['xlabel'] = 'year difference'
+        fig_data['ylabel'] = 'number of SCCs'
         fig_data['yscale'] = 'log'
-        plt.figure()
+        plt.figure(figsize=(4,3))
         plot_bar_from_data(fig_data)
         plt.tight_layout()
         yd_path = pathObj._top_yds+str(i)+".jpg"
@@ -407,14 +407,14 @@ def top_pattern_plot(pathObj):
         fig_data = {}
         fig_data['x'] = xs
         fig_data['y'] = ys
-        fig_data['xlabel'] = 'year\n(c)'
-        fig_data['ylabel'] = 'Number of SCC'
-        fig_data['yscale'] = 'log'
-        plt.figure()
+        fig_data['xlabel'] = 'circle size'
+        fig_data['ylabel'] = 'number of circles'
+        # fig_data['yscale'] = 'log'
+        plt.figure(figsize=(4,3))
         plot_bar_from_data(fig_data)
         plt.tight_layout()
         cs_path = pathObj._top_cs+str(i)+".jpg"
-        plt.savefig(yd_path,dpi=300)
+        plt.savefig(cs_path,dpi=300)
 
 
         line = '|{:}|![pattern]({:})|{:}|{:}|![yd]({:})|![cs]({:})|'.format(i,pattern_path,freq,size,yd_path,cs_path)

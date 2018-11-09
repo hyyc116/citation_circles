@@ -172,7 +172,7 @@ def plot_bar_from_data(fig_data,ax=None):
 
     if ax is None:
 
-        plt.bar(xs,ys,align='center')
+        plt.bar(xs,ys,align='center',width=0.2)
         plt.xlabel(xlabel)
         plt.ylabel(ylabel)
         plt.xscale(xscale)
@@ -183,7 +183,7 @@ def plot_bar_from_data(fig_data,ax=None):
 
     else:
 
-        ax.bar(xs,ys,align='center')
+        ax.bar(xs,ys,align='center',width=0.2)
         ax.set_xlabel(xlabel)
         ax.set_ylabel(ylabel)
         if title is not None:
