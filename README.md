@@ -3,7 +3,7 @@ Detect citation circles in citation network.
 
 ## BASIC STATISTICS
 
-|[WOS-CS](fig/scc_stats_computer_science.jpg)|[WOS-CS](fig/scc_stats_physics.jpg)
+|![WOS-CS](fig/scc_stats_computer_science.jpg)|![WOS-CS](fig/scc_stats_physics.jpg)|
 
 
 ## PATTERN ANALYSIS
