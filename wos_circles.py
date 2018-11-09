@@ -376,9 +376,9 @@ def top_pattern_plot(pathObj):
         yd_dict = Counter(yds)
         xs = []
         ys = []
-        for yd in sorted(yd_dict.keys()):
+        for yd in [0,1,2,3]:
             xs.append(yd)
-            ys.append(yd_dict[yd])
+            ys.append(yd_dict.get(yd,0))
 
 
         fig_data = {}
@@ -400,9 +400,9 @@ def top_pattern_plot(pathObj):
 
         xs = []
         ys = []
-        for cs in sorted(cs_dict.keys()):
+        for cs in [2,3,4]:
             xs.append(cs)
-            ys.append(cs_dict[cs])
+            ys.append(cs_dict.get(cs,0))
 
         fig_data = {}
         fig_data['x'] = xs
