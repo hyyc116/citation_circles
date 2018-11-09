@@ -62,7 +62,7 @@ Detect citation circles in citation network.
 
 ## SOURCE ANALYSIS
 
-analyze relationships between authors, issues, institutes of papers in one SCC.
+analyze relationships between authors, issues, institutes of papers in one SCC. Name disambugition is not neccesary in this situation, since the author set is finite and not easy to be ambugited.
 
 ### Author
 
