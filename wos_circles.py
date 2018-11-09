@@ -389,7 +389,7 @@ def top_pattern_plot(pathObj):
         fig_data['yscale'] = 'log'
         plt.figure(figsize=(4,3))
         plot_bar_from_data(fig_data)
-        plt.tight_layout()
+        # plt.tight_layout()
         yd_path = pathObj._top_yds+str(i)+".jpg"
         plt.savefig(yd_path,dpi=300)
 
@@ -400,9 +400,9 @@ def top_pattern_plot(pathObj):
 
         xs = []
         ys = []
-        for cs in [2,3,4]:
-            xs.append(cs)
-            ys.append(cs_dict.get(cs,0))
+        for c in [2,3,4]:
+            xs.append(c)
+            ys.append(cs_dict.get(c,0))
 
         fig_data = {}
         fig_data['x'] = xs
@@ -412,7 +412,7 @@ def top_pattern_plot(pathObj):
         # fig_data['yscale'] = 'log'
         plt.figure(figsize=(4,3))
         plot_bar_from_data(fig_data)
-        plt.tight_layout()
+        # plt.tight_layout()
         cs_path = pathObj._top_cs+str(i)+".jpg"
         plt.savefig(cs_path,dpi=300)
 

@@ -171,28 +171,28 @@ def plot_bar_from_data(fig_data,ax=None):
 
 
     if ax is None:
-
+        # print xs,ys
         plt.bar(np.arange(len(xs)),ys,align='center',width=0.6)
         plt.xticks(np.arange(len(xs)),xs)
         plt.xlabel(xlabel)
         plt.ylabel(ylabel)
-        plt.xscale(xscale)
-        plt.yscale(yscale)
+        # plt.xscale(xscale)
+        # plt.yscale(yscale)
         if title is not None:
             plt.title(title)
         plt.tight_layout()
 
     else:
-
-        ax.bar(np.arange(len(xs)),ys,align='center',width=0.2)
-        ax.set_xticks(np.arange(len(xs)))
-        ax.set_xticklabels(xs)
+        # print xs
+        ax.bar(xs,ys,align='center',width=0.6)
+        ax.set_xticks(xs)
+        ax.set_xticklabels([str(x) for x in xs])
         ax.set_xlabel(xlabel)
         ax.set_ylabel(ylabel)
         if title is not None:
             ax.set_title(title)
-        ax.set_xscale(xscale)
-        ax.set_yscale(yscale)
+        # ax.set_xscale(xscale)
+        # ax.set_yscale(yscale)
 
 
 
