@@ -166,18 +166,30 @@ def plot_bar_from_data(fig_data,ax=None):
     title = fig_data.get('title',None)
     xlabel = fig_data['xlabel']
     ylabel = fig_data['ylabel']
-    xscale = fig_data.get('xscale','linear')
-    yscale = fig_data.get('yscale','linear')
+    xscale = fig_data.get('xscale',None)
+    yscale = fig_data.get('yscale',None)
 
 
     if ax is None:
         # print xs,ys
+
+        # max_y = np.max(ys)
+
         plt.bar(np.arange(len(xs)),ys,align='center',width=0.6)
         plt.xticks(np.arange(len(xs)),xs)
         plt.xlabel(xlabel)
         plt.ylabel(ylabel)
-        # plt.xscale(xscale)
-        # plt.yscale(yscale)
+
+
+        if xscale is not None:
+            plt.xscale(xscale)
+
+        if yscale is not None:
+            plt.yscale(yscale)
+        else:
+            plt.yticks(range(0,np.max(ys)+1),[str(j) for j in range(0,np.max(ys)+1)])
+
+
         if title is not None:
             plt.title(title)
         plt.tight_layout()
@@ -191,8 +203,13 @@ def plot_bar_from_data(fig_data,ax=None):
         ax.set_ylabel(ylabel)
         if title is not None:
             ax.set_title(title)
-        # ax.set_xscale(xscale)
-        # ax.set_yscale(yscale)
+        if xscale is not None:
+
+            ax.set_xscale(xscale)
+
+        if yscale is not None:
+
+            ax.set_yscale(yscale)
 
 
 
