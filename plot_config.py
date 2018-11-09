@@ -172,8 +172,8 @@ def plot_bar_from_data(fig_data,ax=None):
 
     if ax is None:
 
-        plt.bar(np.aragne(len(xs)),ys,align='center',width=0.6)
-        plt.xticks(np.aragne(len(xs)),xs)
+        plt.bar(np.arange(len(xs)),ys,align='center',width=0.6)
+        plt.xticks(np.arange(len(xs)),xs)
         plt.xlabel(xlabel)
         plt.ylabel(ylabel)
         plt.xscale(xscale)
@@ -184,8 +184,8 @@ def plot_bar_from_data(fig_data,ax=None):
 
     else:
 
-        ax.bar(np.aragne(len(xs)),ys,align='center',width=0.2)
-        ax.set_xticks(np.aragne(len(xs)))
+        ax.bar(np.arange(len(xs)),ys,align='center',width=0.2)
+        ax.set_xticks(np.arange(len(xs)))
         ax.set_xticklabels(xs)
         ax.set_xlabel(xlabel)
         ax.set_ylabel(ylabel)
