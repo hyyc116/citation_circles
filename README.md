@@ -1,6 +1,13 @@
 # citation_circles
 Detect citation circles in citation network.
 
+## BASIC STATISTICS
+
+|[WOS-CS](fig/scc_stats_computer_science.jpg)|[WOS-CS](fig/scc_stats_physics.jpg)
+
+
+## PATTERN ANALYSIS
+
 ### WOS-CS
 
 |index|pattern_path|freq|size|yd_path|cs_path|
