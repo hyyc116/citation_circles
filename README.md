@@ -36,7 +36,7 @@ Detect citation circles in citation network.
 
 
 ### WOS-P
-|index|pattern_path|freq|size|yd_path|cs_path|
+|index|pattern|frequency|size|year difference|circles contained|
 | ------: | :------: | ------: | ------: | :------: | :------: |
 |0|![pattern](fig/patterns/scc_pattern_physics_0.jpg)|22584|2|![yd](fig/yds/scc_yd_physics_0.jpg)|![cs](fig/cs/scc_cs_physics_0.jpg)|
 |1|![pattern](fig/patterns/scc_pattern_physics_1.jpg)|659|3|![yd](fig/yds/scc_yd_physics_1.jpg)|![cs](fig/cs/scc_cs_physics_1.jpg)|

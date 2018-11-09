@@ -349,7 +349,7 @@ def top_pattern_plot(pathObj):
     _id_attrs = json.loads(open(pathObj._id_attrs).read())
 
     ###出现频次最高的20个
-    lines = ['|index|pattern_path|freq|size|yd_path|cs_path|','| ------: | :------: | ------: | ------: | :------: | :------: |']
+    lines = ['|index|pattern_path|freq|size|year difference|circle size|','| ------: | :------: | ------: | ------: | :------: | :------: |']
     # html = '<table>'
     # html+='<tr> <td>index</td> <td>pattern</td> <td>Frequency</td> <td>Size</td> <td>YD Distribution</td> <td>Citation Circle</td></tr>'
     for i,_id in enumerate(sorted(_id_attrs.keys(),key=lambda x:len(_id_attrs[x]),reverse=True)[:20]):
