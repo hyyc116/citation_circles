@@ -209,7 +209,7 @@ def plot_bar_from_data(fig_data,ax=None):
 
         if yscale is not None:
 
-            uax.set_yscale(yscale)
+            ax.set_yscale(yscale)
 
 
 
