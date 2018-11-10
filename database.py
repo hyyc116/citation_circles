@@ -3,6 +3,13 @@
 数据库操作
 '''
 import psycopg2
+import logging
+'''
+==================
+## logging的设置，INFO
+==================
+'''
+logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s',level=logging.INFO)
 
 class dbop:
 

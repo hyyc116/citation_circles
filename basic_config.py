@@ -7,17 +7,11 @@ from collections import Counter
 import math
 import numpy as np
 import random
-import logging
 import networkx as nx
 from networkx.algorithms import isomorphism
 from collections import Counter
 
-'''
-==================
-## logging的设置，INFO
-==================
-'''
-logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s',level=logging.INFO)
+
 
 '''
 ==================
