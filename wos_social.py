@@ -307,7 +307,7 @@ def stats_social(pathObj):
         yd_irs[yd].append(percent)
 
     print 'journal:',percents_mean(all_irs)
-    logging.info('{:} journal scc used ...'.format(num_of_irs))
+    logging.info('{:} organization scc used ...'.format(num_of_irs))
 
     lines = ['|size|share 1st author|share authors|not share authors']
     lines.append('| :------: | :------: | :------: | :------: |')
