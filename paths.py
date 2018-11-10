@@ -69,6 +69,15 @@ class PATHS:
         self._random_100 = 'data/scc_rn100_{:}.txt'.format(self._name)
 
 
+        ### author,期刊，机构的对应关系数据
+        self._authors = 'data/scc_authors_{:}.json'.format(self._name)
+        self._journals = 'data/scc_journals_{:}.json'.format(self._name)
+        self._orgs = 'data/scc_orgs_{:}.json'.format(self._name)
+
+
+
+
+
 
 
 
