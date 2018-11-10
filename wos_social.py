@@ -194,6 +194,8 @@ def stats_social(pathObj):
 
     sizes,yds,ars,jrs,irs = zip(*[line.strip().split('\t') for line in open(pathObj._social)])
 
+    fig,axes = plt.subplots(3,2,figsize=(10,12))
+
     ## 对于author来讲
     all_ar_percents = []
     num_of_ars = 0
@@ -223,19 +225,55 @@ def stats_social(pathObj):
 
     lines = ['|size|share 1st author|share authors|not share authors']
     lines.append('| :------: | :------: | :------: | :------: |')
+    xs = []
+    yses = []
     for size in sorted(size_ars.keys()):
+        xs.append(size)
         ms = percents_mean(size_ars[size])
+        yses.append(ms)
         line = '|{:}|{:}|'.format(size,'|'.join([str(a) for a in ms]))
         lines.append(line)
     open(pathObj._author_size_percent,'w').write('\n'.join(lines))
 
+    ## size author
+    fig_data = {}
+    fig_data['x'] = xs
+    fig_data['ys'] = zip(*yses)
+    fig_data['title'] = 'author percent over size'
+    fig_data['markers'] = [ALL_MARKERS[0],ALL_MARKERS[1],ALL_MARKERS[2]]
+    fig_data['labels'] = ['share 1st author','share authors','not share author']
+    fig_data['xlabel'] = 'size'
+    fig_data['ylabel'] = 'percentage'
+
+    ax00 = axes[0,0]
+    plot_multi_lines_from_data(fig_data,ax=ax00)
+
+
     lines = ['|yd|share 1st author|share authors|not share authors']
     lines.append('| :------: | :------: | :------: | :------: |')
+    xs = []
+    yses = []
     for yd in sorted(yd_ars.keys()):
         ms = percents_mean(yd_ars[yd])
+        xs.append(yd)
+        yses.append(ms)
+
         line = '|{:}|{:}|'.format(yd,'|'.join([str(a) for a in ms]))
         lines.append(line)
     open(pathObj._author_yd_percent,'w').write('\n'.join(lines))
+
+    ## yd author
+    fig_data = {}
+    fig_data['x'] = xs
+    fig_data['ys'] = zip(*yses)
+    fig_data['title'] = 'author percent over year difference'
+    fig_data['markers'] = [ALL_MARKERS[0],ALL_MARKERS[1],ALL_MARKERS[2]]
+    fig_data['labels'] = ['share 1st author','share authors','not share author']
+    fig_data['xlabel'] = 'year difference'
+    fig_data['ylabel'] = 'percentage'
+
+    ax01 = axes[0,1]
+    plot_multi_lines_from_data(fig_data,ax=ax01)
 
     logging.info('{:} author sccs used ...'.format(num_of_ars))
 
@@ -268,19 +306,54 @@ def stats_social(pathObj):
 
     lines = ['|size|share 1st author|share authors|not share authors']
     lines.append('| :------: | :------: | :------: | :------: |')
+    xs=[]
+    yses = []
     for size in sorted(size_jrs.keys()):
         ms = percents_mean(size_jrs[size])
+        xs.append(size)
+        yses.append(ms)
         line = '|{:}|{:}|'.format(size,'|'.join([str(a) for a in ms]))
         lines.append(line)
     open(pathObj._journal_size_percent,'w').write('\n'.join(lines))
 
+
+    ## size journal
+    fig_data = {}
+    fig_data['x'] = xs
+    fig_data['ys'] = zip(*yses)
+    fig_data['title'] = 'journal percent over size'
+    fig_data['markers'] = [ALL_MARKERS[0],ALL_MARKERS[1],ALL_MARKERS[2]]
+    fig_data['labels'] = ['share journal','not share journal']
+    fig_data['xlabel'] = 'size'
+    fig_data['ylabel'] = 'percentage'
+
+    ax10 = axes[1,0]
+    plot_multi_lines_from_data(fig_data,ax=ax10)
+
     lines = ['|yd|share 1st author|share authors|not share authors']
     lines.append('| :------: | :------: | :------: | :------: |')
+    xs=[]
+    yses=[]
     for yd in sorted(yd_jrs.keys()):
         ms = percents_mean(yd_jrs[yd])
+        xs.append(yd)
+        yses.append(ms)
         line = '|{:}|{:}|'.format(yd,'|'.join([str(a) for a in ms]))
         lines.append(line)
     open(pathObj._journal_yd_percent,'w').write('\n'.join(lines))
+
+    ## yd journal
+    fig_data = {}
+    fig_data['x'] = xs
+    fig_data['ys'] = zip(*yses)
+    fig_data['title'] = 'journal percent over year difference'
+    fig_data['markers'] = [ALL_MARKERS[0],ALL_MARKERS[1]]
+    fig_data['labels'] = ['share journal','not share journal']
+    fig_data['xlabel'] = 'year difference'
+    fig_data['ylabel'] = 'percentage'
+
+    ax11 = axes[1,1]
+    plot_multi_lines_from_data(fig_data,ax=ax11)
 
     ## 对于journal来讲
     num_of_irs = 0
@@ -317,6 +390,19 @@ def stats_social(pathObj):
         lines.append(line)
     open(pathObj._insti_size_percent,'w').write('\n'.join(lines))
 
+    ## size insti
+    fig_data = {}
+    fig_data['x'] = xs
+    fig_data['ys'] = zip(*yses)
+    fig_data['title'] = 'institute percent over size'
+    fig_data['markers'] = [ALL_MARKERS[0],ALL_MARKERS[1]]
+    fig_data['labels'] = ['share institute','not share institute']
+    fig_data['xlabel'] = 'size'
+    fig_data['ylabel'] = 'percentage'
+
+    ax11 = axes[2,0]
+    plot_multi_lines_from_data(fig_data,ax=ax11)
+
     lines = ['|yd|share 1st author|share authors|not share authors']
     lines.append('| :------: | :------: | :------: | :------: |')
     for yd in sorted(yd_irs.keys()):
@@ -325,6 +411,22 @@ def stats_social(pathObj):
         lines.append(line)
     open(pathObj._insti_yd_percent,'w').write('\n'.join(lines))
 
+    ## yd insti
+    fig_data = {}
+    fig_data['x'] = xs
+    fig_data['ys'] = zip(*yses)
+    fig_data['title'] = 'institute percent over year difference'
+    fig_data['markers'] = [ALL_MARKERS[0],ALL_MARKERS[1]]
+    fig_data['labels'] = ['share institute','not share institute']
+    fig_data['xlabel'] = 'year difference'
+    fig_data['ylabel'] = 'percentage'
+
+    ax11 = axes[2,1]
+    plot_multi_lines_from_data(fig_data,ax=ax11)
+
+    plt.tight_layout()
+    plt.savfig(pathObj._social_fig,dpi=300)
+    logging.info('social fig saved to {:}.'.format(pathObj._social_fig))
 
 def percents_mean(percents):
     # ar_counter = Counter(all_ars)

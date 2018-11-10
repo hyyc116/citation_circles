@@ -83,4 +83,6 @@ class PATHS:
         self._insti_size_percent = 'data/scc_insti_size_percent_{:}.txt'.format(self._name)
         self._insti_yd_percent = 'data/scc_insti_yd_percent_{:}.txt'.format(self._name)
 
+        self._social_fig = 'fig/scc_social_percent_{:}.jpg'.format(self._name)
+
 
