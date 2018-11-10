@@ -222,7 +222,7 @@ def stats_social(pathObj):
     lines.append('| :------: | :------: | :------: | :------: |')
     for size in sorted(size_ars.keys()):
         ms = percents_mean(size_ars[size])
-        line = '|{:}|{:}|'.format('|'.join([str(a) for a in ms]))
+        line = '|{:}|{:}|'.format(size,'|'.join([str(a) for a in ms]))
         lines.append(line)
     open(pathObj._insti_size_percent,'w').write('\n'.join(lines))
 
