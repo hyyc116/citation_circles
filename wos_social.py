@@ -213,13 +213,47 @@ def stats_social(pathObj):
     print 'all ars percentage ...'
     print_counter(all_ars)
 
-    for size in sorted(size_ars.keys()):
+    # for size in sorted(size_ars.keys()):
 
-        print size,'ars percentage ...'
+    #     print size,'ars percentage ...'
 
-        print_counter(size_ars[size])
+    #     print_counter(size_ars[size])
 
-    logging.info('{:} sccs used ...'.format(num_of_ars))
+    logging.info('{:} author sccs used ...'.format(num_of_ars))
+
+    num_of_jrs = 0
+    all_jrs = []
+    for i,jr in enumerate(jrs):
+
+        if '-1' in jr:
+            continue
+
+        num_of_jrs+=1
+
+        all_jrs.extend(jr.split(','))
+
+    print 'all journal percentage ...'
+
+    print_counter(all_jrs)
+    logging.info('{:} journal scc used ...'.format(num_of_jrs))
+
+
+    num_of_irs = 0
+    all_irs = []
+    for i,ir in enumerate(irs):
+
+        if '-1' in ir:
+            continue
+
+        num_of_irs+=1
+
+        all_irs.extend(ir.split(','))
+
+    print 'all journal percentage ...'
+
+    print_counter(all_irs)
+    logging.info('{:} institute scc used ...'.format(num_of_irs))
+
 
 
 def print_counter(all_ars):
