@@ -24,7 +24,7 @@ logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s',level=log
 ### 示意图的画图方法
 ==================
 '''
-from viz_graph import *
+# from viz_graph import *
 
 
 
