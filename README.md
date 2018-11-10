@@ -64,14 +64,26 @@ Detect citation circles in citation network.
 
 analyze relationships between authors, issues, institutes of papers in one SCC. Name disambugition is not neccesary in this situation, since the author set is finite and not easy to be ambugited.
 
+
+### DATA
+|dataset|number of papers|with Journal|with author|with organization|
+| :------: |:------: |:------: |:------: |:------: |
+|WOS-CS|4011|3846|4011|2888|
+|WOS-P|58315|50498|58314|38721|
+
+
 ### Author
 
+|Same 1st author| same author| not same author|
+| :------: |:------: |:------: |
 
 ### Issue
-
+|Same Journal | not same Journal|
+| :------: |:------: |
 
 ### Institute
-
+|Same Insti| Not Same|
+| :------: |:------: |
 
 
 
