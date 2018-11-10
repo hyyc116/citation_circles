@@ -222,7 +222,7 @@ def stats_social(pathObj):
     logging.info('{:} sccs used ...'.format(num_of_ars))
 
 
-def print_counter(all_ars)
+def print_counter(all_ars):
     ar_counter = Counter(all_ars)
 
     for ar  in ar_counter.keys():
