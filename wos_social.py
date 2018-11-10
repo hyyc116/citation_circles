@@ -80,7 +80,7 @@ def get_social_attrs(pathObj):
 
 ###对于一个SCC里面，作者之间的关系
 ### 作者关系分为 具有相同的一作，具有相同的作者，没有相同作者， 三者之间是互斥关系
-def scc_author_relation(pathObj):
+def scc_social_relations(pathObj):
     ## 加载scc
     sccs = [line.strip().split(',') for line in open(pathObj._sccs)]
     logging.info('{:} sccs are loaded ...'.format(len(sccs)))
@@ -209,7 +209,8 @@ if __name__ == '__main__':
         pathObj = PATHS('computer science')
 
 
-    get_social_attrs(pathObj)
+    # get_social_attrs(pathObj)
+    scc_social_relations(pathObj)
 
 
 
