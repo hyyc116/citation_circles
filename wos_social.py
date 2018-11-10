@@ -425,7 +425,7 @@ def stats_social(pathObj):
     plot_multi_lines_from_data(fig_data,ax=ax11)
 
     plt.tight_layout()
-    plt.savfig(pathObj._social_fig,dpi=300)
+    plt.savefig(pathObj._social_fig,dpi=300)
     logging.info('social fig saved to {:}.'.format(pathObj._social_fig))
 
 def percents_mean(percents):
