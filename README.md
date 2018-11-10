@@ -83,14 +83,14 @@ analyze relationships between authors, issues, institutes of papers in one SCC. 
 ### Issue
 |dataset|share Journal | not share Journal|
 | :------: | :------: | :------: |
-|WOS-CS|0.9801|0.0199|
-|WOS-P|0.9545|0.0454|
+|WOS-CS|0.9720|0.0280|
+|WOS-P|0.9720|0.0280|
 
 ### Institute
 |dataset|share Insti| Not share|
 | :------: | :------: | :------: |
-|WOS-CS|0.7846|0.2154|
-|WOS-P|0.7930|0.2070|
+|WOS-CS|0.8182|0.1818|
+|WOS-P|0.8324|0.1676|
 
 ## CASEs
 
