@@ -188,12 +188,32 @@ def journal_relations(citing_journal,cited_journal):
 
 
 
+## 根据生成的数据分别对三种social数据进行分析
 
+## 如果list中存在-1那个就先舍弃
 
+def stats_social(pathObj):
 
+    sizes,yds,ars,jrs,irs = zip(*[line.strip().split('\t') for line in open(pathObj._social)])
 
+    ## 对于author来讲
+    all_ars = []
+    num_of_ars = 0
+    for i,ar in enumerate(ars):
 
+        if '-1' in ar:
+            continue
 
+        num_of_ars+=1
+        all_ars.extend(ar.split(','))
+
+    ar_counter = Counter(all_ars)
+
+    print 'ar percentage ...'
+    for ar  in ar_counter.keys()
+        print ar,ar_counter[ar]/float(len(all_ars))
+
+    logging.info('number of scc with ars :{:} .'.format(num_of_ars))
 
 
 
@@ -211,7 +231,8 @@ if __name__ == '__main__':
 
 
     # get_social_attrs(pathObj)
-    scc_social_relations(pathObj)
+    # scc_social_relations(pathObj)
+    stats_social(pathObj)
 
 
 
