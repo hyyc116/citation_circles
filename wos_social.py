@@ -19,7 +19,7 @@ def get_social_attrs(pathObj):
 
     ### 在数据库中遍历找到作者、期刊、机构
     query_op = dbop()
-    sql = 'select id,title from wos_titles where title_id=6'
+    sql = 'select id,title from wos_titles where title_id=1'
     pid_journal = {}
     progress = 0
     for pid,journal in query_op.query_database(sql):
@@ -275,8 +275,8 @@ if __name__ == '__main__':
         pathObj = PATHS('computer science')
 
 
-    # get_social_attrs(pathObj)
-    # scc_social_relations(pathObj)
+    get_social_attrs(pathObj)
+    scc_social_relations(pathObj)
     stats_social(pathObj)
 
 
