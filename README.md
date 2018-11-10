@@ -92,6 +92,11 @@ analyze relationships between authors, issues, institutes of papers in one SCC. 
 |WOS-CS|0.7846|0.2154|
 |WOS-P|0.7930|0.2070|
 
+## CASEs
+
+Select several SCCs to analyze all the statistics and compare their diferences.
+
+
 
 
 
