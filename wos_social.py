@@ -210,7 +210,7 @@ def stats_social(pathObj):
     ar_counter = Counter(all_ars)
 
     print 'ar percentage ...'
-    for ar  in ar_counter.keys()
+    for ar  in ar_counter.keys():
         print ar,ar_counter[ar]/float(len(all_ars))
 
     logging.info('number of scc with ars :{:} .'.format(num_of_ars))
