@@ -249,7 +249,7 @@ def stats_social(pathObj):
 
         all_irs.extend(ir.split(','))
 
-    print 'all journal percentage ...'
+    print 'all institute percentage ...'
 
     print_counter(all_irs)
     logging.info('{:} institute scc used ...'.format(num_of_irs))
