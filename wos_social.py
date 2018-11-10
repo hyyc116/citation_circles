@@ -221,7 +221,8 @@ def stats_social(pathObj):
     lines = ['|size|share 1st author|share authors|not share authors']
     lines.append('| :------: | :------: | :------: | :------: |')
     for size in sorted(size_ars.keys()):
-        line = '|{:}|{:}|'.format('|'.join(size_ars[size]))
+        ms = percents_mean(size_ars[size])
+        line = '|{:}|{:}|'.format('|'.join([str(a) for a in ms]))
         lines.append(line)
     open(pathObj._insti_size_percent,'w').write('\n'.join(lines))
 
