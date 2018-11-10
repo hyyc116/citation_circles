@@ -144,6 +144,7 @@ def scc_social_relations(pathObj):
         lines.append(line)
 
     open(pathObj._social,'w').write('\n'.join(lines))
+    logging.info('data saved to {:}.'.format(pathObj._social))
 
 
 def author_relations(citing_seq_author,cited_seq_author):
