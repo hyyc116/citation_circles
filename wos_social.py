@@ -199,23 +199,34 @@ def stats_social(pathObj):
     ## 对于author来讲
     all_ars = []
     num_of_ars = 0
+    size_ars = defaultdict(list)
     for i,ar in enumerate(ars):
 
         if '-1' in ar:
             continue
 
         num_of_ars+=1
+        size = int(sizes[i])
         all_ars.extend(ar.split(','))
+        size_ars[size].extend(ar.split(','))
 
+    print 'all ars percentage ...'
+    print_counter(all_ars)
+
+    for size in sorted(size_ars.keys()):
+
+        print size,'ars percentage ...'
+
+        print_counter(size_ars[size])
+
+    logging.info('{:} sccs used ...'.format(num_of_ars))
+
+
+def print_counter(all_ars)
     ar_counter = Counter(all_ars)
 
-    print 'ar percentage ...'
     for ar  in ar_counter.keys():
         print ar,ar_counter[ar]/float(len(all_ars))
-
-    logging.info('number of scc with ars :{:} .'.format(num_of_ars))
-
-
 
 
 
