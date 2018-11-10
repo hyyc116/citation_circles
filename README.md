@@ -74,15 +74,15 @@ analyze relationships between authors, issues, institutes of papers in one SCC. 
 
 ### Author
 
-|Same 1st author| same author| not same author|
+|share 1st author| share author| not share author|
 | :------: |:------: |:------: |
 
 ### Issue
-|Same Journal | not same Journal|
+|share Journal | not share Journal|
 | :------: |:------: |
 
 ### Institute
-|Same Insti| Not Same|
+|share Insti| Not share|
 | :------: |:------: |
 
 

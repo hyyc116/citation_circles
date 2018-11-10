@@ -78,6 +78,127 @@ def get_social_attrs(pathObj):
     query_op.close_db()
 
 
+###对于一个SCC里面，作者之间的关系
+### 作者关系分为 具有相同的一作，具有相同的作者，没有相同作者， 三者之间是互斥关系
+def scc_author_relation(pathObj):
+    ## 加载scc
+    sccs = [line.strip().split(',') for line in open(pathObj._sccs)]
+    logging.info('{:} sccs are loaded ...'.format(len(sccs)))
+    ##加载作者数据
+    pid_seq_author= json.loads(open(pathObj._authors).read())
+    logging.info('{:} paper author info are loaded.'.format(len(pid_seq_author.keys())))
+    ## 加载journal的数据
+    pid_journal = json.loads(open(pathObj._journals).read())
+    logging.info('{:} paper journal info are loaded.'.format(len(pid_journal.keys())))
+    ## 加载organization的数据
+    pid_orgs = json.loads(open(pathObj._orgs).read())
+    logging.info('{:} paper org info are loaded.'.format(len(pid_orgs.keys())))
+
+    ## 加载整个图
+    edges = [line.strip().split(',') for line in open(pathObj._relations)]
+
+    ## 加载年份
+    yearJson = json.loads(open(pathObj._years).read())
+
+
+    dig = nx.DiGraph()
+    dig.add_edges_from(edges)
+
+    num_of_scc_used = 0
+    ## 对每一个SCC进行遍历
+    lines = []
+    for scc in sccs:
+
+        years = [int(yearJson[pid]) for pid in scc]
+        yd = np.max(years)-np.min(years)
+        size = len(scc)
+
+        scc_edges = list(dig.subgraph(scc).edges)
+
+        ars = []
+        jrs = []
+        irs = []
+        for citing_pid,cited_pid in scc_edges:
+
+            citing_seq_author = pid_seq_author.get(citing_pid,None)
+            cited_seq_author = pid_seq_author.get(cited_pid,None)
+
+            citing_journal = pid_journal.get(citing_pid,None)
+            cited_journal = pid_journal.get(cited_pid,None)
+
+            citing_insti = pid_orgs.get(citing_pid,None)
+            cited_insti = pid_orgs.get(cited_pid,None)
+
+            ar = author_relations(citing_seq_author,cited_seq_author)
+            jr = journal_relations(citing_journal,cited_journal)
+            ir = insti_relations(citing_insti,cited_insti)
+
+            ars.append(ar)
+            jrs.append(jr)
+            irs.append(ir)
+
+        ##有多少个scc有用
+        num_of_scc_used +=1
+
+        line = '{:}\t{:}\t{:}\t{:}\t{:}'.format(size,yd,','.join([str(a) for a in ars]),','.join([str(j) for j in jrs]),','.join([str(i) for i in irs]))
+        lines.append(line)
+
+    open(pathObj._social,'w').write('\n'.join(lines))
+
+
+def author_relations(citing_seq_author,cited_seq_author):
+
+    ##判断第一作者是不是相同
+    if citing_seq_author is None or cited_seq_author is None:
+
+        return -1
+
+    elif citing_seq_author[1] == cited_seq_author[1]:
+
+        return 2
+    ## 如果有共同作者
+    elif len(set(citing_seq_author.values()) & set(cited_seq_author.values()))>0:
+
+        return 1
+
+    ## 如果没有共同作者
+    else:
+        return 0
+
+def insti_relations(citing_insti,cited_insti):
+
+    if citing_insti is None or cited_insti is None:
+        return -1
+    elif len(set(citing_insti) & set(cited_insti))>0:
+        return 1
+    else:
+        return 0
+
+
+def journal_relations(citing_journal,cited_journal):
+
+    if citing_journal is None or cited_journal is None:
+        return -1
+    elif citing_journal == cited_journal:
+        return 1
+    else:
+        return 0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 if __name__ == '__main__':
 
     data = int(sys.argv[1])

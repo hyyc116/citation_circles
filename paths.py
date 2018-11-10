@@ -73,7 +73,7 @@ class PATHS:
         self._authors = 'data/scc_authors_{:}.json'.format(self._name)
         self._journals = 'data/scc_journals_{:}.json'.format(self._name)
         self._orgs = 'data/scc_orgs_{:}.json'.format(self._name)
-
+        self._social = 'data/scc_social_{:}.txt'.format(self._name)
 
 
 
