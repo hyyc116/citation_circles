@@ -153,7 +153,7 @@ def author_relations(citing_seq_author,cited_seq_author):
 
         return -1
 
-    elif citing_seq_author[1] == cited_seq_author[1]:
+    elif citing_seq_author['1'] == cited_seq_author['1']:
 
         return 2
     ## 如果有共同作者
