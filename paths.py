@@ -74,10 +74,13 @@ class PATHS:
         self._journals = 'data/scc_journals_{:}.json'.format(self._name)
         self._orgs = 'data/scc_orgs_{:}.json'.format(self._name)
         self._social = 'data/scc_social_{:}.txt'.format(self._name)
+        self._author_size_percent = 'data/scc_author_size_percent_{:}.txt'.format(self._name)
+        self._author_yd_percent = 'data/scc_author_yd_percent_{:}.txt'.format(self._name)
 
+        self._journal_size_percent = 'data/scc_journal_size_percent_{:}.txt'.format(self._name)
+        self._journal_yd_percent = 'data/scc_journal_yd_percent_{:}.txt'.format(self._name)
 
-
-
-
+        self._insti_size_percent = 'data/scc_insti_size_percent_{:}.txt'.format(self._name)
+        self._insti_yd_percent = 'data/scc_insti_yd_percent_{:}.txt'.format(self._name)
 
 

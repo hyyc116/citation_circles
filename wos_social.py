@@ -189,15 +189,13 @@ def journal_relations(citing_journal,cited_journal):
 
 
 ## 根据生成的数据分别对三种social数据进行分析
-
 ## 如果list中存在-1那个就先舍弃
-
 def stats_social(pathObj):
 
     sizes,yds,ars,jrs,irs = zip(*[line.strip().split('\t') for line in open(pathObj._social)])
 
     ## 对于author来讲
-    all_ars = []
+    all_ar_percents = []
     num_of_ars = 0
     size_ars = defaultdict(list)
     for i,ar in enumerate(ars):
@@ -207,62 +205,74 @@ def stats_social(pathObj):
 
         num_of_ars+=1
         size = int(sizes[i])
-        all_ars.extend(ar.split(','))
-        size_ars[size].extend(ar.split(','))
+        # all_ars.extend(ar.split(','))
+        s_ars = ar.split(',')
+        s_len = float(len(s_ars))
+        c = Counter(s_ars)
+        percent = [c.get('0',0)/s_len,c.get('1',0)/s_len,c.get('2',0)/s_len]
+
+        size_ars[size].append(percent)
+        all_ar_percents.append(percent)
 
     print 'all ars percentage ...'
-    print_counter(all_ars)
+    ar_means = percents_mean(all_ar_percents)
+    print ar_means
 
-    # for size in sorted(size_ars.keys()):
-
-    #     print size,'ars percentage ...'
-
-    #     print_counter(size_ars[size])
+    lines = ['|size|share 1st author|share authors|not share authors']
+    lines.append('| :------: | :------: | :------: | :------: |')
+    for size in sorted(size_ars.keys()):
+        line = '|{:}|{:}|'.format('|'.join(size_ars[size]))
+        lines.append(line)
+    open(pathObj._insti_size_percent,'w').write('\n'.join(lines))
 
     logging.info('{:} author sccs used ...'.format(num_of_ars))
 
-    num_of_jrs = 0
-    all_jrs = []
-    for i,jr in enumerate(jrs):
+    # num_of_jrs = 0
+    # all_jrs = []
+    # for i,jr in enumerate(jrs):
 
-        if '-1' in jr:
-            continue
+    #     if '-1' in jr:
+    #         continue
 
-        num_of_jrs+=1
-
-        all_jrs.extend(jr.split(','))
-
-    print 'all journal percentage ...'
-
-    print_counter(all_jrs)
-    logging.info('{:} journal scc used ...'.format(num_of_jrs))
-
-
-    num_of_irs = 0
-    all_irs = []
-    for i,ir in enumerate(irs):
-
-        if '-1' in ir:
-            continue
-
-        num_of_irs+=1
-
-        all_irs.extend(ir.split(','))
-
-    print 'all institute percentage ...'
-
-    print_counter(all_irs)
-    logging.info('{:} institute scc used ...'.format(num_of_irs))
+    #     num_of_jrs+=1
 
 
 
-def print_counter(all_ars):
-    ar_counter = Counter(all_ars)
 
-    for ar  in ar_counter.keys():
-        print ar,ar_counter[ar]/float(len(all_ars))
+    #     all_jrs.extend()
+
+    # print 'all journal percentage ...'
+
+    # percents_mean(all_jrs)
+    # logging.info('{:} journal scc used ...'.format(num_of_jrs))
 
 
+    # num_of_irs = 0
+    # all_irs = []
+    # for i,ir in enumerate(irs):
+
+    #     if '-1' in ir:
+    #         continue
+
+    #     num_of_irs+=1
+
+    #     all_irs.extend(ir.split(','))
+
+    # print 'all institute percentage ...'
+
+    # percents_mean(all_irs)
+    # logging.info('{:} institute scc used ...'.format(num_of_irs))
+
+
+def percents_mean(percents):
+    # ar_counter = Counter(all_ars)
+    cols = zip(*percents)
+
+    means = []
+    for col in cols:
+        means.append(np.mean(col))
+
+    return means
 
 
 if __name__ == '__main__':
@@ -275,8 +285,8 @@ if __name__ == '__main__':
         pathObj = PATHS('computer science')
 
 
-    get_social_attrs(pathObj)
-    scc_social_relations(pathObj)
+    # get_social_attrs(pathObj)
+    # scc_social_relations(pathObj)
     stats_social(pathObj)
 
 
