@@ -198,6 +198,7 @@ def stats_social(pathObj):
     all_ar_percents = []
     num_of_ars = 0
     size_ars = defaultdict(list)
+    yd_ars = defaultdict(list)
     for i,ar in enumerate(ars):
 
         if '-1' in ar:
@@ -205,13 +206,15 @@ def stats_social(pathObj):
 
         num_of_ars+=1
         size = int(sizes[i])
+        yd = int(yds[i])
         # all_ars.extend(ar.split(','))
         s_ars = ar.split(',')
         s_len = float(len(s_ars))
         c = Counter(s_ars)
-        percent = [c.get('0',0)/s_len,c.get('1',0)/s_len,c.get('2',0)/s_len]
+        percent = [c.get('2',0)/s_len,c.get('1',0)/s_len,c.get('0',0)/s_len]
 
         size_ars[size].append(percent)
+        yd_ars[yd].append(percent)
         all_ar_percents.append(percent)
 
     print 'all ars percentage ...'
@@ -224,45 +227,103 @@ def stats_social(pathObj):
         ms = percents_mean(size_ars[size])
         line = '|{:}|{:}|'.format(size,'|'.join([str(a) for a in ms]))
         lines.append(line)
-    open(pathObj._insti_size_percent,'w').write('\n'.join(lines))
+    open(pathObj._author_size_percent,'w').write('\n'.join(lines))
+
+    lines = ['|yd|share 1st author|share authors|not share authors']
+    lines.append('| :------: | :------: | :------: | :------: |')
+    for yd in sorted(yd_ars.keys()):
+        ms = percents_mean(yd_ars[yd])
+        line = '|{:}|{:}|'.format(yd,'|'.join([str(a) for a in ms]))
+        lines.append(line)
+    open(pathObj._author_yd_percent,'w').write('\n'.join(lines))
 
     logging.info('{:} author sccs used ...'.format(num_of_ars))
 
-    # num_of_jrs = 0
-    # all_jrs = []
-    # for i,jr in enumerate(jrs):
+    ## 对于journal来讲
+    num_of_jrs = 0
+    all_jrs = []
+    size_jrs = defaultdict(list)
+    yd_jrs = defaultdict(list)
+    for i,jr in enumerate(jrs):
 
-    #     if '-1' in jr:
-    #         continue
+        if '-1' in jr:
+            continue
 
-    #     num_of_jrs+=1
+        num_of_jrs+=1
 
+        size = int(sizes[i])
+        yd = int(yds[i])
 
+        s_jrs = jr.split(',')
+        s_len = float(len(s_jrs))
+        c = Counter(s_jrs)
+        percent = [c.get('1',0)/s_len,c.get('0',0)/s_len]
 
+        all_jrs.append(percent)
+        size_jrs[size].append(percent)
+        yd_jrs[yd].append(percent)
 
-    #     all_jrs.extend()
+    print 'journal:',percents_mean(all_jrs)
+    logging.info('{:} journal scc used ...'.format(num_of_jrs))
 
-    # print 'all journal percentage ...'
+    lines = ['|size|share 1st author|share authors|not share authors']
+    lines.append('| :------: | :------: | :------: | :------: |')
+    for size in sorted(size_jrs.keys()):
+        ms = percents_mean(size_jrs[size])
+        line = '|{:}|{:}|'.format(size,'|'.join([str(a) for a in ms]))
+        lines.append(line)
+    open(pathObj._journal_size_percent,'w').write('\n'.join(lines))
 
-    # percents_mean(all_jrs)
-    # logging.info('{:} journal scc used ...'.format(num_of_jrs))
+    lines = ['|yd|share 1st author|share authors|not share authors']
+    lines.append('| :------: | :------: | :------: | :------: |')
+    for yd in sorted(yd_jrs.keys()):
+        ms = percents_mean(yd_jrs[yd])
+        line = '|{:}|{:}|'.format(yd,'|'.join([str(a) for a in ms]))
+        lines.append(line)
+    open(pathObj._journal_yd_percent,'w').write('\n'.join(lines))
 
+    ## 对于journal来讲
+    num_of_irs = 0
+    all_irs = []
+    size_irs = defaultdict(list)
+    yd_irs = defaultdict(list)
+    for i,ir in enumerate(irs):
 
-    # num_of_irs = 0
-    # all_irs = []
-    # for i,ir in enumerate(irs):
+        if '-1' in ir:
+            continue
 
-    #     if '-1' in ir:
-    #         continue
+        num_of_irs+=1
 
-    #     num_of_irs+=1
+        size = int(sizes[i])
+        yd = int(yds[i])
 
-    #     all_irs.extend(ir.split(','))
+        s_irs = ir.split(',')
+        s_len = float(len(s_irs))
+        c = Counter(s_irs)
+        percent = [c.get('1',0)/s_len,c.get('0',0)/s_len]
 
-    # print 'all institute percentage ...'
+        all_irs.append(percent)
+        size_irs[size].append(percent)
+        yd_irs[yd].append(percent)
 
-    # percents_mean(all_irs)
-    # logging.info('{:} institute scc used ...'.format(num_of_irs))
+    print 'journal:',percents_mean(all_irs)
+    logging.info('{:} journal scc used ...'.format(num_of_irs))
+
+    lines = ['|size|share 1st author|share authors|not share authors']
+    lines.append('| :------: | :------: | :------: | :------: |')
+    for size in sorted(size_irs.keys()):
+        ms = percents_mean(size_irs[size])
+        line = '|{:}|{:}|'.format(size,'|'.join([str(a) for a in ms]))
+        lines.append(line)
+    open(pathObj._insti_size_percent,'w').write('\n'.join(lines))
+
+    lines = ['|yd|share 1st author|share authors|not share authors']
+    lines.append('| :------: | :------: | :------: | :------: |')
+    for yd in sorted(yd_irs.keys()):
+        ms = percents_mean(yd_irs[yd])
+        line = '|{:}|{:}|'.format(yd,'|'.join([str(a) for a in ms]))
+        lines.append(line)
+    open(pathObj._insti_yd_percent,'w').write('\n'.join(lines))
 
 
 def percents_mean(percents):

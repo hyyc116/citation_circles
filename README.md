@@ -77,8 +77,8 @@ analyze relationships between authors, issues, institutes of papers in one SCC. 
 #### WOS-CS
 |dataset|share 1st author| share authos| not share author|
 | :------:| :------: |:------: |:------: |
-|WOS-CS|0.3522|0.2516|0.3962|
-|WOS-P|0.3568|0.3815|0.2617|
+|WOS-CS|0.4443|0.2650|0.2907|
+|WOS-P|0.4508|0.3543|0.1949|
 
 ### Issue
 |dataset|share Journal | not share Journal|
