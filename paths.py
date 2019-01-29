@@ -68,6 +68,9 @@ class PATHS:
         ## 随机100个SCC的地址
         self._random_100 = 'data/scc_rn100_{:}.txt'.format(self._name)
 
+        ### 长度为10的scc的地址
+        self._10_size_scc_fig = 'fig/scc_size_10_{:}'.format(self._name)
+
 
         ### author,期刊，机构的对应关系数据
         self._authors = 'data/scc_authors_{:}.json'.format(self._name)
