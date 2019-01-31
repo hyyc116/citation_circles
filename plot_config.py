@@ -81,7 +81,7 @@ def plot_line_from_data(fig_data,ax=None):
 
     xs = fig_data['x']
     ys = fig_data['y']
-    title = fig_data['title']
+    title = fig_data.get('title',None)
     xlabel = fig_data['xlabel']
     ylabel = fig_data['ylabel']
     marker = fig_data['marker']
@@ -98,7 +98,8 @@ def plot_line_from_data(fig_data,ax=None):
         plt.ylabel(ylabel)
         plt.xscale(xscale)
         plt.yscale(yscale)
-        plt.title(title)
+        if title is not None:
+            plt.title(title)
 
         if xtick:
             plt.xticks(xs,xs)
@@ -110,7 +111,8 @@ def plot_line_from_data(fig_data,ax=None):
         ax.plot(xs,ys,marker)
         ax.set_xlabel(xlabel)
         ax.set_ylabel(ylabel)
-        ax.set_title(title)
+        if title is not None:
+            ax.set_title(title)
         ax.set_xscale(xscale)
         ax.set_yscale(yscale)
         if xtick:
@@ -121,7 +123,7 @@ def plot_scatter_from_data(fig_data,ax=None):
 
     xs = fig_data['x']
     ys = fig_data['y']
-    title = fig_data['title']
+    title = fig_data.get('title',None)
     xlabel = fig_data['xlabel']
     ylabel = fig_data['ylabel']
     marker = fig_data['marker']
@@ -138,7 +140,8 @@ def plot_scatter_from_data(fig_data,ax=None):
         plt.ylabel(ylabel)
         plt.xscale(xscale)
         plt.yscale(yscale)
-        plt.title(title)
+        if title is not None:
+            plt.title(title)
 
         if xtick:
             plt.xticks(xs,xs)
@@ -150,7 +153,8 @@ def plot_scatter_from_data(fig_data,ax=None):
         ax.scatter(xs,ys,marker=marker)
         ax.set_xlabel(xlabel)
         ax.set_ylabel(ylabel)
-        ax.set_title(title)
+        if title is not None:
+            ax.set_title(title)
         ax.set_xscale(xscale)
         ax.set_yscale(yscale)
         if xtick:
@@ -217,7 +221,8 @@ def plot_multi_lines_from_data(fig_data,ax=None):
 
     xs = fig_data['x']
     yses = fig_data['ys']
-    title = fig_data['title']
+    title = fig_data.get('title',None)
+
     xlabel = fig_data['xlabel']
     ylabel = fig_data['ylabel']
     markers = fig_data['markers']
@@ -234,7 +239,8 @@ def plot_multi_lines_from_data(fig_data,ax=None):
         plt.ylabel(ylabel)
         plt.xscale(xscale)
         plt.yscale(yscale)
-        plt.title(title)
+        if title is not None:
+            plt.title(title)
         plt.legend()
         plt.tight_layout()
 
@@ -244,7 +250,8 @@ def plot_multi_lines_from_data(fig_data,ax=None):
 
         ax.set_xlabel(xlabel)
         ax.set_ylabel(ylabel)
-        ax.set_title(title)
+        if title is not None:
+            ax.set_title(title)
         ax.set_xscale(xscale)
         ax.set_yscale(yscale)
         ax.legend()
@@ -254,7 +261,7 @@ def plot_multi_lines_from_two_data(fig_data,ax=None):
 
     xses = fig_data['xs']
     yses = fig_data['ys']
-    title = fig_data['title']
+    title = fig_data.get('title',None)
     xlabel = fig_data['xlabel']
     ylabel = fig_data['ylabel']
     markers = fig_data['markers']
@@ -270,7 +277,9 @@ def plot_multi_lines_from_two_data(fig_data,ax=None):
         plt.ylabel(ylabel)
         plt.xscale(xscale)
         plt.yscale(yscale)
-        plt.title(title)
+        if title is not None:
+
+            plt.title(title)
         plt.legend()
         plt.tight_layout()
 
@@ -280,7 +289,8 @@ def plot_multi_lines_from_two_data(fig_data,ax=None):
 
         ax.set_xlabel(xlabel)
         ax.set_ylabel(ylabel)
-        ax.set_title(title)
+        if title is not None:
+            ax.set_title(title)
         ax.set_xscale(xscale)
         ax.set_yscale(yscale)
         ax.legend()

@@ -11,54 +11,53 @@ Detect citation circles in citation network.
 
 ### WOS-CS
 
-|index|pattern|frequency|size|year difference|circles contained|
+|index|pattern_path|freq|size|year difference|circle size|
 | ------: | :------: | ------: | ------: | :------: | :------: |
-|0|![pattern](fig/patterns/scc_pattern_computer_science_0.jpg)|1379|2|![yd](fig/yds/scc_yd_computer_science_0.jpg)|![cs](fig/cs/scc_cs_computer_science_0.jpg)|
-|1|![pattern](fig/patterns/scc_pattern_computer_science_1.jpg)|54|3|![yd](fig/yds/scc_yd_computer_science_1.jpg)|![cs](fig/cs/scc_cs_computer_science_1.jpg)|
-|2|![pattern](fig/patterns/scc_pattern_computer_science_2.jpg)|50|3|![yd](fig/yds/scc_yd_computer_science_2.jpg)|![cs](fig/cs/scc_cs_computer_science_2.jpg)|
-|3|![pattern](fig/patterns/scc_pattern_computer_science_3.jpg)|37|3|![yd](fig/yds/scc_yd_computer_science_3.jpg)|![cs](fig/cs/scc_cs_computer_science_3.jpg)|
-|4|![pattern](fig/patterns/scc_pattern_computer_science_4.jpg)|17|3|![yd](fig/yds/scc_yd_computer_science_4.jpg)|![cs](fig/cs/scc_cs_computer_science_4.jpg)|
-|5|![pattern](fig/patterns/scc_pattern_computer_science_5.jpg)|8|4|![yd](fig/yds/scc_yd_computer_science_5.jpg)|![cs](fig/cs/scc_cs_computer_science_5.jpg)|
-|6|![pattern](fig/patterns/scc_pattern_computer_science_6.jpg)|4|4|![yd](fig/yds/scc_yd_computer_science_6.jpg)|![cs](fig/cs/scc_cs_computer_science_6.jpg)|
-|7|![pattern](fig/patterns/scc_pattern_computer_science_7.jpg)|3|4|![yd](fig/yds/scc_yd_computer_science_7.jpg)|![cs](fig/cs/scc_cs_computer_science_7.jpg)|
-|8|![pattern](fig/patterns/scc_pattern_computer_science_8.jpg)|3|4|![yd](fig/yds/scc_yd_computer_science_8.jpg)|![cs](fig/cs/scc_cs_computer_science_8.jpg)|
-|9|![pattern](fig/patterns/scc_pattern_computer_science_9.jpg)|3|5|![yd](fig/yds/scc_yd_computer_science_9.jpg)|![cs](fig/cs/scc_cs_computer_science_9.jpg)|
-|10|![pattern](fig/patterns/scc_pattern_computer_science_10.jpg)|3|4|![yd](fig/yds/scc_yd_computer_science_10.jpg)|![cs](fig/cs/scc_cs_computer_science_10.jpg)|
-|11|![pattern](fig/patterns/scc_pattern_computer_science_11.jpg)|3|4|![yd](fig/yds/scc_yd_computer_science_11.jpg)|![cs](fig/cs/scc_cs_computer_science_11.jpg)|
-|12|![pattern](fig/patterns/scc_pattern_computer_science_12.jpg)|3|4|![yd](fig/yds/scc_yd_computer_science_12.jpg)|![cs](fig/cs/scc_cs_computer_science_12.jpg)|
-|13|![pattern](fig/patterns/scc_pattern_computer_science_13.jpg)|3|4|![yd](fig/yds/scc_yd_computer_science_13.jpg)|![cs](fig/cs/scc_cs_computer_science_13.jpg)|
-|14|![pattern](fig/patterns/scc_pattern_computer_science_14.jpg)|3|3|![yd](fig/yds/scc_yd_computer_science_14.jpg)|![cs](fig/cs/scc_cs_computer_science_14.jpg)|
-|15|![pattern](fig/patterns/scc_pattern_computer_science_15.jpg)|2|4|![yd](fig/yds/scc_yd_computer_science_15.jpg)|![cs](fig/cs/scc_cs_computer_science_15.jpg)|
-|16|![pattern](fig/patterns/scc_pattern_computer_science_16.jpg)|2|4|![yd](fig/yds/scc_yd_computer_science_16.jpg)|![cs](fig/cs/scc_cs_computer_science_16.jpg)|
-|17|![pattern](fig/patterns/scc_pattern_computer_science_17.jpg)|2|4|![yd](fig/yds/scc_yd_computer_science_17.jpg)|![cs](fig/cs/scc_cs_computer_science_17.jpg)|
-|18|![pattern](fig/patterns/scc_pattern_computer_science_18.jpg)|2|4|![yd](fig/yds/scc_yd_computer_science_18.jpg)|![cs](fig/cs/scc_cs_computer_science_18.jpg)|
-|19|![pattern](fig/patterns/scc_pattern_computer_science_19.jpg)|1|4|![yd](fig/yds/scc_yd_computer_science_19.jpg)|![cs](fig/cs/scc_cs_computer_science_19.jpg)|
-
+|0|![pattern](fig/patterns/scc_pattern_computer_science_0.jpg)|1379(82.23%)|2|![yd](fig/yds/scc_yd_computer_science_0.jpg)|![cs](fig/cs/scc_cs_computer_science_0.jpg)|
+|1|![pattern](fig/patterns/scc_pattern_computer_science_1.jpg)|54(3.22%)|3|![yd](fig/yds/scc_yd_computer_science_1.jpg)|![cs](fig/cs/scc_cs_computer_science_1.jpg)|
+|2|![pattern](fig/patterns/scc_pattern_computer_science_2.jpg)|50(2.98%)|3|![yd](fig/yds/scc_yd_computer_science_2.jpg)|![cs](fig/cs/scc_cs_computer_science_2.jpg)|
+|3|![pattern](fig/patterns/scc_pattern_computer_science_3.jpg)|37(2.21%)|3|![yd](fig/yds/scc_yd_computer_science_3.jpg)|![cs](fig/cs/scc_cs_computer_science_3.jpg)|
+|4|![pattern](fig/patterns/scc_pattern_computer_science_4.jpg)|17(1.01%)|3|![yd](fig/yds/scc_yd_computer_science_4.jpg)|![cs](fig/cs/scc_cs_computer_science_4.jpg)|
+|5|![pattern](fig/patterns/scc_pattern_computer_science_5.jpg)|8(0.48%)|4|![yd](fig/yds/scc_yd_computer_science_5.jpg)|![cs](fig/cs/scc_cs_computer_science_5.jpg)|
+|6|![pattern](fig/patterns/scc_pattern_computer_science_6.jpg)|4(0.24%)|4|![yd](fig/yds/scc_yd_computer_science_6.jpg)|![cs](fig/cs/scc_cs_computer_science_6.jpg)|
+|7|![pattern](fig/patterns/scc_pattern_computer_science_7.jpg)|3(0.18%)|4|![yd](fig/yds/scc_yd_computer_science_7.jpg)|![cs](fig/cs/scc_cs_computer_science_7.jpg)|
+|8|![pattern](fig/patterns/scc_pattern_computer_science_8.jpg)|3(0.18%)|4|![yd](fig/yds/scc_yd_computer_science_8.jpg)|![cs](fig/cs/scc_cs_computer_science_8.jpg)|
+|9|![pattern](fig/patterns/scc_pattern_computer_science_9.jpg)|3(0.18%)|5|![yd](fig/yds/scc_yd_computer_science_9.jpg)|![cs](fig/cs/scc_cs_computer_science_9.jpg)|
+|10|![pattern](fig/patterns/scc_pattern_computer_science_10.jpg)|3(0.18%)|4|![yd](fig/yds/scc_yd_computer_science_10.jpg)|![cs](fig/cs/scc_cs_computer_science_10.jpg)|
+|11|![pattern](fig/patterns/scc_pattern_computer_science_11.jpg)|3(0.18%)|4|![yd](fig/yds/scc_yd_computer_science_11.jpg)|![cs](fig/cs/scc_cs_computer_science_11.jpg)|
+|12|![pattern](fig/patterns/scc_pattern_computer_science_12.jpg)|3(0.18%)|4|![yd](fig/yds/scc_yd_computer_science_12.jpg)|![cs](fig/cs/scc_cs_computer_science_12.jpg)|
+|13|![pattern](fig/patterns/scc_pattern_computer_science_13.jpg)|3(0.18%)|4|![yd](fig/yds/scc_yd_computer_science_13.jpg)|![cs](fig/cs/scc_cs_computer_science_13.jpg)|
+|14|![pattern](fig/patterns/scc_pattern_computer_science_14.jpg)|3(0.18%)|3|![yd](fig/yds/scc_yd_computer_science_14.jpg)|![cs](fig/cs/scc_cs_computer_science_14.jpg)|
+|15|![pattern](fig/patterns/scc_pattern_computer_science_15.jpg)|2(0.12%)|4|![yd](fig/yds/scc_yd_computer_science_15.jpg)|![cs](fig/cs/scc_cs_computer_science_15.jpg)|
+|16|![pattern](fig/patterns/scc_pattern_computer_science_16.jpg)|2(0.12%)|4|![yd](fig/yds/scc_yd_computer_science_16.jpg)|![cs](fig/cs/scc_cs_computer_science_16.jpg)|
+|17|![pattern](fig/patterns/scc_pattern_computer_science_17.jpg)|2(0.12%)|4|![yd](fig/yds/scc_yd_computer_science_17.jpg)|![cs](fig/cs/scc_cs_computer_science_17.jpg)|
+|18|![pattern](fig/patterns/scc_pattern_computer_science_18.jpg)|2(0.12%)|4|![yd](fig/yds/scc_yd_computer_science_18.jpg)|![cs](fig/cs/scc_cs_computer_science_18.jpg)|
+|19|![pattern](fig/patterns/scc_pattern_computer_science_19.jpg)|1(0.06%)|4|![yd](fig/yds/scc_yd_computer_science_19.jpg)|![cs](fig/cs/scc_cs_computer_science_19.jpg)|
 
 ### WOS-P
-|index|pattern|frequency|size|year difference|circles contained|
-| ------: | :------: | ------: | ------: | :------: | :------: |
-|0|![pattern](fig/patterns/scc_pattern_physics_0.jpg)|22584|2|![yd](fig/yds/scc_yd_physics_0.jpg)|![cs](fig/cs/scc_cs_physics_0.jpg)|
-|1|![pattern](fig/patterns/scc_pattern_physics_1.jpg)|659|3|![yd](fig/yds/scc_yd_physics_1.jpg)|![cs](fig/cs/scc_cs_physics_1.jpg)|
-|2|![pattern](fig/patterns/scc_pattern_physics_2.jpg)|544|3|![yd](fig/yds/scc_yd_physics_2.jpg)|![cs](fig/cs/scc_cs_physics_2.jpg)|
-|3|![pattern](fig/patterns/scc_pattern_physics_3.jpg)|409|3|![yd](fig/yds/scc_yd_physics_3.jpg)|![cs](fig/cs/scc_cs_physics_3.jpg)|
-|4|![pattern](fig/patterns/scc_pattern_physics_4.jpg)|207|3|![yd](fig/yds/scc_yd_physics_4.jpg)|![cs](fig/cs/scc_cs_physics_4.jpg)|
-|5|![pattern](fig/patterns/scc_pattern_physics_5.jpg)|38|3|![yd](fig/yds/scc_yd_physics_5.jpg)|![cs](fig/cs/scc_cs_physics_5.jpg)|
-|6|![pattern](fig/patterns/scc_pattern_physics_6.jpg)|26|4|![yd](fig/yds/scc_yd_physics_6.jpg)|![cs](fig/cs/scc_cs_physics_6.jpg)|
-|7|![pattern](fig/patterns/scc_pattern_physics_7.jpg)|26|4|![yd](fig/yds/scc_yd_physics_7.jpg)|![cs](fig/cs/scc_cs_physics_7.jpg)|
-|8|![pattern](fig/patterns/scc_pattern_physics_8.jpg)|26|4|![yd](fig/yds/scc_yd_physics_8.jpg)|![cs](fig/cs/scc_cs_physics_8.jpg)|
-|9|![pattern](fig/patterns/scc_pattern_physics_9.jpg)|25|4|![yd](fig/yds/scc_yd_physics_9.jpg)|![cs](fig/cs/scc_cs_physics_9.jpg)|
-|10|![pattern](fig/patterns/scc_pattern_physics_10.jpg)|19|4|![yd](fig/yds/scc_yd_physics_10.jpg)|![cs](fig/cs/scc_cs_physics_10.jpg)|
-|11|![pattern](fig/patterns/scc_pattern_physics_11.jpg)|15|4|![yd](fig/yds/scc_yd_physics_11.jpg)|![cs](fig/cs/scc_cs_physics_11.jpg)|
-|12|![pattern](fig/patterns/scc_pattern_physics_12.jpg)|14|4|![yd](fig/yds/scc_yd_physics_12.jpg)|![cs](fig/cs/scc_cs_physics_12.jpg)|
-|13|![pattern](fig/patterns/scc_pattern_physics_13.jpg)|13|4|![yd](fig/yds/scc_yd_physics_13.jpg)|![cs](fig/cs/scc_cs_physics_13.jpg)|
-|14|![pattern](fig/patterns/scc_pattern_physics_14.jpg)|13|4|![yd](fig/yds/scc_yd_physics_14.jpg)|![cs](fig/cs/scc_cs_physics_14.jpg)|
-|15|![pattern](fig/patterns/scc_pattern_physics_15.jpg)|12|4|![yd](fig/yds/scc_yd_physics_15.jpg)|![cs](fig/cs/scc_cs_physics_15.jpg)|
-|16|![pattern](fig/patterns/scc_pattern_physics_16.jpg)|11|4|![yd](fig/yds/scc_yd_physics_16.jpg)|![cs](fig/cs/scc_cs_physics_16.jpg)|
-|17|![pattern](fig/patterns/scc_pattern_physics_17.jpg)|10|4|![yd](fig/yds/scc_yd_physics_17.jpg)|![cs](fig/cs/scc_cs_physics_17.jpg)|
-|18|![pattern](fig/patterns/scc_pattern_physics_18.jpg)|10|4|![yd](fig/yds/scc_yd_physics_18.jpg)|![cs](fig/cs/scc_cs_physics_18.jpg)|
-|19|![pattern](fig/patterns/scc_pattern_physics_19.jpg)|9|4|![yd](fig/yds/scc_yd_physics_19.jpg)|![cs](fig/cs/scc_cs_physics_19.jpg)|
 
+|index|pattern_path|freq|size|year difference|circle size|
+| ------: | :------: | ------: | ------: | :------: | :------: |
+|0|![pattern](fig/patterns/scc_pattern_physics_0.jpg)|22584(88.63%)|2|![yd](fig/yds/scc_yd_physics_0.jpg)|![cs](fig/cs/scc_cs_physics_0.jpg)|
+|1|![pattern](fig/patterns/scc_pattern_physics_1.jpg)|659(2.59%)|3|![yd](fig/yds/scc_yd_physics_1.jpg)|![cs](fig/cs/scc_cs_physics_1.jpg)|
+|2|![pattern](fig/patterns/scc_pattern_physics_2.jpg)|544(2.14%)|3|![yd](fig/yds/scc_yd_physics_2.jpg)|![cs](fig/cs/scc_cs_physics_2.jpg)|
+|3|![pattern](fig/patterns/scc_pattern_physics_3.jpg)|409(1.61%)|3|![yd](fig/yds/scc_yd_physics_3.jpg)|![cs](fig/cs/scc_cs_physics_3.jpg)|
+|4|![pattern](fig/patterns/scc_pattern_physics_4.jpg)|207(0.81%)|3|![yd](fig/yds/scc_yd_physics_4.jpg)|![cs](fig/cs/scc_cs_physics_4.jpg)|
+|5|![pattern](fig/patterns/scc_pattern_physics_5.jpg)|38(0.15%)|3|![yd](fig/yds/scc_yd_physics_5.jpg)|![cs](fig/cs/scc_cs_physics_5.jpg)|
+|6|![pattern](fig/patterns/scc_pattern_physics_6.jpg)|26(0.10%)|4|![yd](fig/yds/scc_yd_physics_6.jpg)|![cs](fig/cs/scc_cs_physics_6.jpg)|
+|7|![pattern](fig/patterns/scc_pattern_physics_7.jpg)|26(0.10%)|4|![yd](fig/yds/scc_yd_physics_7.jpg)|![cs](fig/cs/scc_cs_physics_7.jpg)|
+|8|![pattern](fig/patterns/scc_pattern_physics_8.jpg)|26(0.10%)|4|![yd](fig/yds/scc_yd_physics_8.jpg)|![cs](fig/cs/scc_cs_physics_8.jpg)|
+|9|![pattern](fig/patterns/scc_pattern_physics_9.jpg)|25(0.10%)|4|![yd](fig/yds/scc_yd_physics_9.jpg)|![cs](fig/cs/scc_cs_physics_9.jpg)|
+|10|![pattern](fig/patterns/scc_pattern_physics_10.jpg)|19(0.07%)|4|![yd](fig/yds/scc_yd_physics_10.jpg)|![cs](fig/cs/scc_cs_physics_10.jpg)|
+|11|![pattern](fig/patterns/scc_pattern_physics_11.jpg)|15(0.06%)|4|![yd](fig/yds/scc_yd_physics_11.jpg)|![cs](fig/cs/scc_cs_physics_11.jpg)|
+|12|![pattern](fig/patterns/scc_pattern_physics_12.jpg)|14(0.05%)|4|![yd](fig/yds/scc_yd_physics_12.jpg)|![cs](fig/cs/scc_cs_physics_12.jpg)|
+|13|![pattern](fig/patterns/scc_pattern_physics_13.jpg)|13(0.05%)|4|![yd](fig/yds/scc_yd_physics_13.jpg)|![cs](fig/cs/scc_cs_physics_13.jpg)|
+|14|![pattern](fig/patterns/scc_pattern_physics_14.jpg)|13(0.05%)|4|![yd](fig/yds/scc_yd_physics_14.jpg)|![cs](fig/cs/scc_cs_physics_14.jpg)|
+|15|![pattern](fig/patterns/scc_pattern_physics_15.jpg)|12(0.05%)|4|![yd](fig/yds/scc_yd_physics_15.jpg)|![cs](fig/cs/scc_cs_physics_15.jpg)|
+|16|![pattern](fig/patterns/scc_pattern_physics_16.jpg)|11(0.04%)|4|![yd](fig/yds/scc_yd_physics_16.jpg)|![cs](fig/cs/scc_cs_physics_16.jpg)|
+|17|![pattern](fig/patterns/scc_pattern_physics_17.jpg)|10(0.04%)|4|![yd](fig/yds/scc_yd_physics_17.jpg)|![cs](fig/cs/scc_cs_physics_17.jpg)|
+|18|![pattern](fig/patterns/scc_pattern_physics_18.jpg)|10(0.04%)|4|![yd](fig/yds/scc_yd_physics_18.jpg)|![cs](fig/cs/scc_cs_physics_18.jpg)|
+|19|![pattern](fig/patterns/scc_pattern_physics_19.jpg)|9(0.04%)|4|![yd](fig/yds/scc_yd_physics_19.jpg)|![cs](fig/cs/scc_cs_physics_19.jpg)|
 
 ## SOURCE ANALYSIS
 

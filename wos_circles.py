@@ -120,7 +120,7 @@ def scc_stats(pathObj):
 
     logging.info("start to draw stats fig ...")
 
-    fig,axes = plt.subplots(4,1,figsize=(6,16))
+    fig,axes = plt.subplots(3,1,figsize=(6,12))
 
     data = []
     logging.info('Distribution of SCC Size ...')
@@ -142,9 +142,9 @@ def scc_stats(pathObj):
     fig_data = {}
     fig_data['x'] = xs
     fig_data['y'] = ys
-    fig_data['title'] = '\n\nSize of SCC'
-    fig_data['xlabel'] = 'Size of SCC\n(a)'
-    fig_data['ylabel'] = 'Number of SCC'
+    # fig_data['title'] = '\n\nSize of SCC'
+    fig_data['xlabel'] = 'size of SCCs\n(a)'
+    fig_data['ylabel'] = 'number of SCCs'
     fig_data['xscale'] = 'log'
     fig_data['yscale'] = 'log'
     fig_data['marker'] = '-o'
@@ -188,9 +188,9 @@ def scc_stats(pathObj):
     fig_data = {}
     fig_data['x'] = xs
     fig_data['y'] = ys
-    fig_data['title'] = 'Year Difference'
-    fig_data['xlabel'] = 'Year Differnece\n(b)'
-    fig_data['ylabel'] = 'Number of SCC'
+    # fig_data['title'] = 'Year Difference'
+    fig_data['xlabel'] = 'published year difference\n(b)'
+    fig_data['ylabel'] = 'number of SCCs'
     # fig_data['xscale'] = 'log'
     fig_data['yscale'] = 'log'
     fig_data['marker'] = '-o'
@@ -205,9 +205,9 @@ def scc_stats(pathObj):
     fig_data = {}
     # fig_data['x'] = xs
     # fig_data['y'] = ys
-    fig_data['title'] = 'Number distribution over year'
-    fig_data['xlabel'] = 'year\n(c)'
-    fig_data['ylabel'] = 'Number of SCC'
+    # fig_data['title'] = 'Number distribution over year'
+    fig_data['xlabel'] = 'published year\n(c)'
+    fig_data['ylabel'] = 'number of SCCs'
     # fig_data['xscale'] = 'log'
     fig_data['yscale'] = 'log'
     # fig_data['marker'] = '-o'
@@ -243,7 +243,7 @@ def scc_stats(pathObj):
     logging.info('scatter plot ...')
     ## SIZE和YD的散点图
 
-    ax3 = axes[3]
+    # ax3 = axes[3]
     fig_data = {}
     fig_data['x'] = sizes
     fig_data['y'] = yds
@@ -255,7 +255,7 @@ def scc_stats(pathObj):
     fig_data['marker'] = 'o'
     # fig_data['xtick']=True
 
-    plot_scatter_from_data(fig_data,ax3)
+    # plot_scatter_from_data(fig_data,ax3)
     data.append(fig_data)
 
     plt.suptitle(pathObj._dataset,fontsize=20,weight='bold')
@@ -348,6 +348,11 @@ def top_pattern_plot(pathObj):
     _id_pattern = json.loads(open(pathObj._id_patterns).read())
     _id_attrs = json.loads(open(pathObj._id_attrs).read())
 
+
+    ### 所有pattern出现的次数
+    num_of_sccs = len([line.strip() for line in open(pathObj._sccs)])
+
+
     ###出现频次最高的20个
     lines = ['|index|pattern_path|freq|size|year difference|circle size|','| ------: | :------: | ------: | ------: | :------: | :------: |']
     # html = '<table>'
@@ -407,7 +412,7 @@ def top_pattern_plot(pathObj):
         fig_data = {}
         fig_data['x'] = xs
         fig_data['y'] = ys
-        fig_data['xlabel'] = 'circle size'
+        fig_data['xlabel'] = 'cycle size'
         fig_data['ylabel'] = 'number of circles'
         # fig_data['yscale'] = 'log'
         plt.figure(figsize=(4,3))
@@ -417,7 +422,7 @@ def top_pattern_plot(pathObj):
         plt.savefig(cs_path,dpi=300)
 
 
-        line = '|{:}|![pattern]({:})|{:}|{:}|![yd]({:})|![cs]({:})|'.format(i,pattern_path,freq,size,yd_path,cs_path)
+        line = '|{:}|![pattern]({:})|{:}({:.2%})|{:}|![yd]({:})|![cs]({:})|'.format(i,pattern_path,freq,freq/float(num_of_sccs),size,yd_path,cs_path)
 
         lines.append(line)
 
@@ -448,6 +453,8 @@ if __name__ == '__main__':
 
     # statistics_of_cc(pathObj)
     # scc_compare(pathObj)
+
+    ### fig 3
     # scc_stats(pathObj)
     # scc_patterns(pathObj)
     top_pattern_plot(pathObj)
